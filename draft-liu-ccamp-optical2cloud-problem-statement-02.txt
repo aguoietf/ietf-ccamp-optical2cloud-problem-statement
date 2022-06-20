@@ -5,12 +5,12 @@
 CCAMP Working Group                                               S. Liu
 Internet-Draft                                              China Mobile
 Intended status: Standards Track                                H. Zheng
-Expires: 12 December 2022                            Huawei Technologies
+Expires: 22 December 2022                            Huawei Technologies
                                                                   A. Guo
                                                   Futurewei Technologies
                                                                  Y. Zhao
                                                             China Mobile
-                                                            10 June 2022
+                                                            20 June 2022
 
 
    Problem Statement and Gap Analyis for Connecting to Cloud DCs via
@@ -41,7 +41,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 December 2022.
+   This Internet-Draft will expire on 22 December 2022.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Liu, et al.             Expires 12 December 2022                [Page 1]
+Liu, et al.             Expires 22 December 2022                [Page 1]
 
 Internet-Draft       Cloud Optical Problem Statement           June 2022
 
@@ -74,16 +74,14 @@ Table of Contents
    2.  Requirements and Gap Analysis . . . . . . . . . . . . . . . .   4
      2.1.  Multi-cloud Access  . . . . . . . . . . . . . . . . . . .   4
      2.2.  Service-awareness . . . . . . . . . . . . . . . . . . . .   5
-     2.3.  Deterministic performance . . . . . . . . . . . . . . . .   6
-     2.4.  High-performance and high-reliability . . . . . . . . . .   6
    3.  Manageability Considerations  . . . . . . . . . . . . . . . .   6
-   4.  Security Considerations . . . . . . . . . . . . . . . . . . .   7
-   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   7
-   6.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   7
-     6.1.  Normative References  . . . . . . . . . . . . . . . . . .   7
+   4.  Security Considerations . . . . . . . . . . . . . . . . . . .   6
+   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
+   6.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   6
+     6.1.  Normative References  . . . . . . . . . . . . . . . . . .   6
      6.2.  Informative References  . . . . . . . . . . . . . . . . .   7
-   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .   8
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   8
+   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .   7
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   7
 
 1.  Introduction
 
@@ -106,16 +104,16 @@ Table of Contents
    complement the IP/Ethernet-based aggregation networks to enable full-
    fiber connections.  This scenario is described in the Fifth
    Generation Fixed Network Architecture by the ETSI F5G ISG [].  OTN
+   can be used to provide high quality carrier services in addition to
+   the traditional MPLS VPN services.  OTN provides TDM-based
 
 
 
-Liu, et al.             Expires 12 December 2022                [Page 2]
+Liu, et al.             Expires 22 December 2022                [Page 2]
 
 Internet-Draft       Cloud Optical Problem Statement           June 2022
 
 
-   can be used to provide high quality carrier services in addition to
-   the traditional MPLS VPN services.  OTN provides TDM-based
    connections with no queueing or scheduling needed, with an access
    bandwidth granularity of 1.25Gbps, i.e. ODU0 (Optical Data Unit) and
    above.  This bandwidth granularity is typically more than what a
@@ -165,7 +163,9 @@ Internet-Draft       Cloud Optical Problem Statement           June 2022
 
 
 
-Liu, et al.             Expires 12 December 2022                [Page 3]
+
+
+Liu, et al.             Expires 22 December 2022                [Page 3]
 
 Internet-Draft       Cloud Optical Problem Statement           June 2022
 
@@ -221,7 +221,7 @@ Internet-Draft       Cloud Optical Problem Statement           June 2022
 
 
 
-Liu, et al.             Expires 12 December 2022                [Page 4]
+Liu, et al.             Expires 22 December 2022                [Page 4]
 
 Internet-Draft       Cloud Optical Problem Statement           June 2022
 
@@ -277,7 +277,7 @@ Internet-Draft       Cloud Optical Problem Statement           June 2022
 
 
 
-Liu, et al.             Expires 12 December 2022                [Page 5]
+Liu, et al.             Expires 22 December 2022                [Page 5]
 
 Internet-Draft       Cloud Optical Problem Statement           June 2022
 
@@ -288,55 +288,9 @@ Internet-Draft       Cloud Optical Problem Statement           June 2022
    does not run BGP protocols due to its heavy weight and complexity.
    Therefore, PCEP seems to be a better protocol choice in this case.
 
-2.3.  Deterministic performance
-
-   Accessing cloud-based services requires deterministic performance
-   from the underlay optical networks in order to achieve good user
-   experience.  Connections built on optical networks need to be
-   deterministic in many quality factors, such as end-to-end latency,
-   delay jitter, bandwidth, and availaility supported by end-to-end
-   protection and restoration.  This deterministic performance are hard
-   to reach on shared resources but can be achieved relatively easier on
-   TDM-based optical networks.
-
-   Traditionally in an optical network, connections are pre-configured
-   and the speed of dynamic restoration and reconfiguration of
-   connections are in the order of several hundred milliseconds to
-   several minutes.  The control and management plane of the optical
-   network should be enhanced to significantly improve the speed of
-   connection operations and be able to convey accurate estimate of the
-   performance to the upper layer to achieve end-to-end deterministic
-   performance.  Extensions to existing control plane and management
-   interfaces are likely needed to support this capability.
-
-2.4.  High-performance and high-reliability
-
-   To support the above-mentioned applications some of the network
-   properties are critical to promise the Quality of Services (QoS).
-   For instance, high bandwidth (e.g. larger than 1 Gbps), low latency
-   (e.g. no more than 10 ms) and low jitter (e.g. no more than 5 ms),
-   are required for Cloud VR.  In addition, small-granularity container
-   is required to improve the efficiency of the networks.
-
-   It is also critical to support highly reliable DCI for cloud
-   services.  With advanced optical transport network protection and
-   automatic recovery technologies, services can still run properly even
-   fiber cuts occur in the DCI network.  Specific protection and
-   restoration schemes are required, to provide high reliability for the
-   networks.
-
 3.  Manageability Considerations
 
    TBD
-
-
-
-
-
-Liu, et al.             Expires 12 December 2022                [Page 6]
-
-Internet-Draft       Cloud Optical Problem Statement           June 2022
-
 
 4.  Security Considerations
 
@@ -377,6 +331,13 @@ Internet-Draft       Cloud Optical Problem Statement           June 2022
               DOI 10.17487/RFC7752, March 2016,
               <https://www.rfc-editor.org/info/rfc7752>.
 
+
+
+Liu, et al.             Expires 22 December 2022                [Page 6]
+
+Internet-Draft       Cloud Optical Problem Statement           June 2022
+
+
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
@@ -386,26 +347,18 @@ Internet-Draft       Cloud Optical Problem Statement           June 2022
    [I-D.ietf-rtgwg-net2cloud-gap-analysis]
               Dunbar, L., Malis, A. G., and C. Jacquenet, "Networks
               Connecting to Hybrid Cloud DCs: Gap Analysis", Work in
-
-
-
-Liu, et al.             Expires 12 December 2022                [Page 7]
-
-Internet-Draft       Cloud Optical Problem Statement           June 2022
-
-
               Progress, Internet-Draft, draft-ietf-rtgwg-net2cloud-gap-
-              analysis-08, 26 May 2022,
+              analysis-09, 15 June 2022,
               <https://www.ietf.org/archive/id/draft-ietf-rtgwg-
-              net2cloud-gap-analysis-08.txt>.
+              net2cloud-gap-analysis-09.txt>.
 
    [I-D.ietf-rtgwg-net2cloud-problem-statement]
               Dunbar, L., Consulting, M., Jacquenet, C., and M. Toy,
               "Dynamic Networks to Hybrid Cloud DCs Problem Statement",
               Work in Progress, Internet-Draft, draft-ietf-rtgwg-
-              net2cloud-problem-statement-12, 7 March 2022,
+              net2cloud-problem-statement-13, 15 June 2022,
               <https://www.ietf.org/archive/id/draft-ietf-rtgwg-
-              net2cloud-problem-statement-12.txt>.
+              net2cloud-problem-statement-13.txt>.
 
 Acknowledgments
 
@@ -431,6 +384,16 @@ Authors' Addresses
    Email: aihuaguo.ietf@gmail.com
 
 
+
+
+
+
+
+Liu, et al.             Expires 22 December 2022                [Page 7]
+
+Internet-Draft       Cloud Optical Problem Statement           June 2022
+
+
    Yang Zhao
    China Mobile
 
@@ -445,4 +408,41 @@ Authors' Addresses
 
 
 
-Liu, et al.             Expires 12 December 2022                [Page 8]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Liu, et al.             Expires 22 December 2022                [Page 8]
