@@ -133,42 +133,6 @@ author:
 
    Upon examinining the cloud traffic contents and obtain client inforamtion such as cloud destination and QoS requirements, the PE node needs to forward such information to the control entity of the OTN network to make decisions on connection configurations. The client information could include but not limited to, destination IP addresses, type of cloud service, and QoS information such as bandwidth, latency bound and resiliency factors.The control entity may be an SDN controller or a control plane instace; in the former case communications are established between each of the PE nodes and the controller and the controller serves as a central authority for OTN connection configurations; whereas in the latter all of the PE nodes need to disseimate client information between each other using control plane protocols or possibly through some intermediate reflectors. It is desirable that the protocols used for both cases are consistent, and ideally, the same. A candidate protocol is the PCEP {{!RFC5440}} protocol defined in the PCE working group, but there is currently no extensions defined for describing such client traffic information. Extensions to the PCEP protocol can be defined outside this document to support the use case. It is also possible to use the BGP Link State (BGP-LS) protocol {{!RFC7752}} to perform the distribution of client information. However typically an OTN PE node does not run BGP protocols due to its heavy weight and complexity. Therefore, PCEP seems to be a better protocol choice in this case.
 
-## Deterministic performance
-
-   Accessing cloud-based services requires deterministic performance from
-   the underlay optical networks in order to achieve good user experience. 
-   Connections built on optical networks need to be deterministic in many 
-   quality factors, such as end-to-end latency, delay jitter, bandwidth,
-   and availaility supported by end-to-end protection and restoration. This
-   deterministic performance are hard to reach on shared resources
-   but can be achieved relatively easier on TDM-based optical networks.
-   
-   Traditionally in an optical network, connections are pre-configured and
-   the speed of dynamic restoration and reconfiguration of connections are
-   in the order of several hundred milliseconds to several minutes. The control
-   and management plane of the optical network should be enhanced to significantly
-   improve the speed of connection operations and be able to convey accurate
-   estimate of the performance to the upper layer to achieve end-to-end
-   deterministic performance. Extensions to existing control plane and 
-   management interfaces are likely needed to support this capability.
-
-   
-## High-performance and high-reliability
-
-   To support the above-mentioned applications some of the network
-   properties are critical to promise the Quality of Services (QoS).
-   For instance, high bandwidth (e.g. larger than 1 Gbps), low latency
-   (e.g. no more than 10 ms) and low jitter (e.g. no more than 5 ms),
-   are required for Cloud VR.  In addition, small-granularity container
-   is required to improve the efficiency of the networks.
-
-   It is also critical to support highly reliable DCI for cloud
-   services.  With advanced optical transport network protection and
-   automatic recovery technologies, services can still run properly even
-   fiber cuts occur in the DCI network.  Specific protection and
-   restoration schemes are required, to provide high reliability for the
-   networks.
-
 # Manageability Considerations
 
    TBD
