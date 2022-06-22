@@ -13,9 +13,9 @@ Expires: 22 December 2022                            Huawei Technologies
                                                             20 June 2022
 
 
-   Problem Statement and Gap Analyis for Connecting to Cloud DCs via
+   Problem Statement and Gap Analyis for Connecting to Cloud via
                             Optical Networks
-           draft-liu-ccamp-optical2cloud-problem-statement-00
+           draft-liu-ccamp-optical2cloud-problem-statement-01
 
 Abstract
 
