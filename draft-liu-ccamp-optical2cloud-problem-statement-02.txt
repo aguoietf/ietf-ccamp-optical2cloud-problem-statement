@@ -120,8 +120,8 @@ Internet-Draft       Cloud Optical Problem Statement           June 2022
    single application would demand.  Therefore, user traffic usually
    needs to be aggregated before being carried forward through the
    network.  However, advanced OTN techonologies developed in ITU-T work
-   items have aimed to enhance OTN to support services of small
-   granularity as low as 2Mbps with the introduction of the Optical
+   items have aimed to enhance OTN to support services of smaller
+   granularity with the introduction of the Optical
    Service Unit (OSU).  This enhancement makes OTN an even more suitable
    solution for bearing cloud traffic with high quality and bandwidth
    granularity close to what an IP/Ethernet-based network could offer.
@@ -207,7 +207,7 @@ Internet-Draft       Cloud Optical Problem Statement           June 2022
    and multipoint-to-multipoint (MP2MP) connections to support diverse
    L2VPN or L3VPN services.
 
-   OTN connections are point to point by nature on the data plane.  To
+   OTN connections were point-to-point by nature on the data plane.  To
    support P2MP and MP2MP services, multiple P2P OTN connections can be
    established between each source and destination pair.  The routing
    and signaling protocols for OTN need to coordinate these OTN
@@ -263,7 +263,7 @@ Internet-Draft       Cloud Optical Problem Statement           June 2022
    client information could include but not limited to, destination IP
    addresses, type of cloud service, and QoS information such as
    bandwidth, latency bound and resiliency factors.The control entity
-   may be an SDN controller or a control plane instace; in the former
+   may be an SDN controller or a control plane instance; in the former
    case communications are established between each of the PE nodes and
    the controller and the controller serves as a central authority for
    OTN connection configurations; whereas in the latter all of the PE
