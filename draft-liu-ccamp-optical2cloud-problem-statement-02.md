@@ -1,10 +1,10 @@
 ---
 coding: utf-8
 
-title: Problem Statement and Gap Analyis for Connecting to Cloud DCs via Optical Networks
+title: Problem Statement and Gap Analyis for Connecting to Cloud via Optical Networks
 
 abbrev: Cloud Optical Problem Statement
-docname: draft-liu-ccamp-optical2cloud-problem-statement-00
+docname: draft-liu-ccamp-optical2cloud-problem-statement-01
 workgroup: CCAMP Working Group
 category: std
 ipr: trust200902
@@ -61,8 +61,8 @@ author:
    needed, with an access bandwidth granularity of 1.25Gbps, i.e. ODU0 (Optical Data Unit) and above.
    This bandwidth granularity is typically more than what a single application would demand. 
    Therefore, user traffic usually needs to be aggregated before being carried forward through the network. However,
-   advanced OTN techonologies developed in ITU-T work items have aimed to enhance OTN to support services
-   of small granularity as low as 2Mbps with the introduction of the Optical Service Unit (OSU). 
+   advanced OTN techonologies developed in ITU-T work items have aimed to enhance OTN to support even smaller granular services
+   with the introduction of the Optical Service Unit (OSU). 
    This enhancement makes OTN an even more suitable solution for bearing cloud traffic with high quality and bandwidth granularity close
    to what an IP/Ethernet-based network could offer.
 
@@ -118,7 +118,7 @@ author:
    point-to-point(P2P), point-to-multipoint(P2MP) and multipoint-to-multipoint (MP2MP) connections to support
    diverse L2VPN or L3VPN services.
 
-   OTN connections are point to point by nature on the data plane. To support P2MP and MP2MP services, multiple 
+   OTN connections were point-to-point by nature on the data plane. To support P2MP and MP2MP services, multiple 
    P2P OTN connections can be established between each source and destination pair. The routing and signaling protocols for OTN need to coordinate these OTN connections to ensure they are routed with proper diverse paths to meet resilliency and path quality constraints.
 
    {{!RFC4461}} defines the requirements for establishing P2MP MPLS label switched paths (LSPs). {{!RFC6388}} describes
@@ -131,7 +131,7 @@ author:
    
    New service-aware capabilties are needed for both the control plane and data plane to address this challenge for OTN networks. On the data plane, new hardware that can examine cloud traffic contents such as the IP header (destination IP address and/or the TOS field), VRF ids or layer 2 VLAN ids are introduced to make the PE node capable of sensing the type of traffic. This work for data plane are out of the scope of this document.
 
-   Upon examinining the cloud traffic contents and obtain client inforamtion such as cloud destination and QoS requirements, the PE node needs to forward such information to the control entity of the OTN network to make decisions on connection configurations. The client information could include but not limited to, destination IP addresses, type of cloud service, and QoS information such as bandwidth, latency bound and resiliency factors.The control entity may be an SDN controller or a control plane instace; in the former case communications are established between each of the PE nodes and the controller and the controller serves as a central authority for OTN connection configurations; whereas in the latter all of the PE nodes need to disseimate client information between each other using control plane protocols or possibly through some intermediate reflectors. It is desirable that the protocols used for both cases are consistent, and ideally, the same. A candidate protocol is the PCEP {{!RFC5440}} protocol defined in the PCE working group, but there is currently no extensions defined for describing such client traffic information. Extensions to the PCEP protocol can be defined outside this document to support the use case. It is also possible to use the BGP Link State (BGP-LS) protocol {{!RFC7752}} to perform the distribution of client information. However typically an OTN PE node does not run BGP protocols due to its heavy weight and complexity. Therefore, PCEP seems to be a better protocol choice in this case.
+   Upon examinining the cloud traffic contents and obtain client inforamtion such as cloud destination and QoS requirements, the PE node needs to forward such information to the control entity of the OTN network to make decisions on connection configurations. The client information could include but not limited to, destination IP addresses, type of cloud service, and QoS information such as bandwidth, latency bound and resiliency factors.The control entity may be an SDN controller or a control plane instance; in the former case communications are established between each of the PE nodes and the controller and the controller serves as a central authority for OTN connection configurations; whereas in the latter all of the PE nodes need to disseimate client information between each other using control plane protocols or possibly through some intermediate reflectors. It is desirable that the protocols used for both cases are consistent, and ideally, the same. A candidate protocol is the PCEP {{!RFC5440}} protocol defined in the PCE working group, but there is currently no extensions defined for describing such client traffic information. Extensions to the PCEP protocol can be defined outside this document to support the use case. It is also possible to use the BGP Link State (BGP-LS) protocol {{!RFC7752}} to perform the distribution of client information. However typically an OTN PE node does not run BGP protocols due to its heavy weight and complexity. Therefore, PCEP seems to be a better protocol choice in this case.
 
 # Manageability Considerations
 

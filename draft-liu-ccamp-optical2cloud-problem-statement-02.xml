@@ -10,10 +10,10 @@
 <?rfc symrefs="yes"?>
 <?rfc comments="yes"?>
 
-<rfc ipr="trust200902" docName="draft-liu-ccamp-optical2cloud-problem-statement-00" category="std">
+<rfc ipr="trust200902" docName="draft-liu-ccamp-optical2cloud-problem-statement-01" category="std">
 
   <front>
-    <title abbrev="Cloud Optical Problem Statement">Problem Statement and Gap Analyis for Connecting to Cloud DCs via Optical Networks</title>
+    <title abbrev="Cloud Optical Problem Statement">Problem Statement and Gap Analyis for Connecting to Cloud via Optical Networks</title>
 
     <author initials="S." surname="Liu" fullname="Sheng Liu">
       <organization>China Mobile</organization>
@@ -40,7 +40,7 @@
       </address>
     </author>
 
-    <date year="2022" month="June" day="20"/>
+    <date year="2022" month="June" day="28"/>
 
     
     <workgroup>CCAMP Working Group</workgroup>
@@ -86,8 +86,8 @@
    needed, with an access bandwidth granularity of 1.25Gbps, i.e. ODU0 (Optical Data Unit) and above.
    This bandwidth granularity is typically more than what a single application would demand. 
    Therefore, user traffic usually needs to be aggregated before being carried forward through the network. However,
-   advanced OTN techonologies developed in ITU-T work items have aimed to enhance OTN to support services
-   of small granularity as low as 2Mbps with the introduction of the Optical Service Unit (OSU). 
+   advanced OTN techonologies developed in ITU-T work items have aimed to enhance OTN to support even smaller granular services
+   with the introduction of the Optical Service Unit (OSU). 
    This enhancement makes OTN an even more suitable solution for bearing cloud traffic with high quality and bandwidth granularity close
    to what an IP/Ethernet-based network could offer.</t>
 
@@ -144,7 +144,7 @@
    point-to-point(P2P), point-to-multipoint(P2MP) and multipoint-to-multipoint (MP2MP) connections to support
    diverse L2VPN or L3VPN services.</t>
 
-<t>OTN connections are point to point by nature on the data plane. To support P2MP and MP2MP services, multiple 
+<t>OTN connections were point-to-point by nature on the data plane. To support P2MP and MP2MP services, multiple 
    P2P OTN connections can be established between each source and destination pair. The routing and signaling protocols for OTN need to coordinate these OTN connections to ensure they are routed with proper diverse paths to meet resilliency and path quality constraints.</t>
 
 <t><xref target="RFC4461"/> defines the requirements for establishing P2MP MPLS label switched paths (LSPs). <xref target="RFC6388"/> describes
@@ -158,7 +158,7 @@
 
 <t>New service-aware capabilties are needed for both the control plane and data plane to address this challenge for OTN networks. On the data plane, new hardware that can examine cloud traffic contents such as the IP header (destination IP address and/or the TOS field), VRF ids or layer 2 VLAN ids are introduced to make the PE node capable of sensing the type of traffic. This work for data plane are out of the scope of this document.</t>
 
-<t>Upon examinining the cloud traffic contents and obtain client inforamtion such as cloud destination and QoS requirements, the PE node needs to forward such information to the control entity of the OTN network to make decisions on connection configurations. The client information could include but not limited to, destination IP addresses, type of cloud service, and QoS information such as bandwidth, latency bound and resiliency factors.The control entity may be an SDN controller or a control plane instace; in the former case communications are established between each of the PE nodes and the controller and the controller serves as a central authority for OTN connection configurations; whereas in the latter all of the PE nodes need to disseimate client information between each other using control plane protocols or possibly through some intermediate reflectors. It is desirable that the protocols used for both cases are consistent, and ideally, the same. A candidate protocol is the PCEP <xref target="RFC5440"/> protocol defined in the PCE working group, but there is currently no extensions defined for describing such client traffic information. Extensions to the PCEP protocol can be defined outside this document to support the use case. It is also possible to use the BGP Link State (BGP-LS) protocol <xref target="RFC7752"/> to perform the distribution of client information. However typically an OTN PE node does not run BGP protocols due to its heavy weight and complexity. Therefore, PCEP seems to be a better protocol choice in this case.</t>
+<t>Upon examinining the cloud traffic contents and obtain client inforamtion such as cloud destination and QoS requirements, the PE node needs to forward such information to the control entity of the OTN network to make decisions on connection configurations. The client information could include but not limited to, destination IP addresses, type of cloud service, and QoS information such as bandwidth, latency bound and resiliency factors.The control entity may be an SDN controller or a control plane instance; in the former case communications are established between each of the PE nodes and the controller and the controller serves as a central authority for OTN connection configurations; whereas in the latter all of the PE nodes need to disseimate client information between each other using control plane protocols or possibly through some intermediate reflectors. It is desirable that the protocols used for both cases are consistent, and ideally, the same. A candidate protocol is the PCEP <xref target="RFC5440"/> protocol defined in the PCE working group, but there is currently no extensions defined for describing such client traffic information. Extensions to the PCEP protocol can be defined outside this document to support the use case. It is also possible to use the BGP Link State (BGP-LS) protocol <xref target="RFC7752"/> to perform the distribution of client information. However typically an OTN PE node does not run BGP protocols due to its heavy weight and complexity. Therefore, PCEP seems to be a better protocol choice in this case.</t>
 
 </section>
 </section>
@@ -367,104 +367,104 @@
   </back>
 
 <!-- ##markdown-source:
-H4sIAAiWsGIAA5VabXMbN5L+rl+Bs79ICYeyFXuT9dbWRZFkR3V64Vqyt7Lr
-rStwBiQRDwezgxkxTOT77fd0NzCDoaTNrqsSkUOgAfTL0083JsuyvdwVtlq+
-UV27yL7b22ttW5o3ata4eWnW6qbVrVmbqlW6KtQ7XavjSpdb69XCNerEVZXJ
-W8xXrVMnpesKdXri1Z3V6rpuba5LdWXajWs++709PZ835u5NGBd/f7DSXuHy
-Sq+xiaLRizYrbZfluV7XmZMpRzkJyGqZmPk4MXvxYo+WWjauq7HMyfHlTP0V
-D2h/7+jhXo6hS9ds3yjfFnu2bt6otul8e/TixR9fHO3tQVZV/K8uXYXlt8bv
-1faN+nvr8onyrmkbs/D4tF3Lh9ytaV3/D5yta1euebOnVIb/lJID3KwMlr6w
-HT9zDdR8srKVVpdubkvDT81a2/KNwik9jd6U3+c0ZM0jplhiR+aP2q2trtTf
-aPQg98dOb4xVtyZfVa50S4vNJ+J/pdErmfr9isc+IvvY4if1rnOD3Ldd2zXm
-X4nWNGnZuak17eL7JT18RPRPGpr4G3bw+6r4FaO2GL79eftAF3tZlik9922j
-83aPZl3qaqt0XZdwjda6CnaxVV525NUqeIwqjfamgJIrA7Ox/318zy4NoXXH
-HsyPJ2puKrOwrVo0bq3alVGVODCt5XNT6cY6tVmZxvCvhW41fEgvFjanIBDh
-/BSDW9N4tY+QOFAImVw3jcU23J1p+q0F8cpgM5iPP1Na6naFCYiEjoOvMD5v
-7Nx4XjN4vvKj4GzMPzvb8HfogJ7UjfH0TWm1RORqilwPsa5S5hfr6dS0VO6q
-tnGlqktdsXD4uyslwn1X13B8jnDaUdxt1MRULLK2RQEj7j1X5ySr6HIyBdtH
-oj01kNLQ3dxA8yR27fCtdnVX6oZ3vbGFKbc0tTB16bZQmMWGSZd1Yz10QKOg
-QtGfrQoEMPTqp0pdN0td2V/DOhvbrkjOuitbW5dGEYp0LAFrWpKYC4IZ0v3S
-QLkNz2I1Q5euNWJREsP6aF2jl2bsOlj4pstXwfbeNHc2xyIF/LkqxGRdVZgG
-uCkaj1qEvaHuOxxYrexypf7Z6dK2W1inNjhRBSmAGxKtvYzQdwgRjXDAsIki
-WaXbqBJ+UOV44KpMVlVz/A+axFF08TMUlLiFdxg3TYzT73il78gyphq76vns
-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
-9+a5Os7pvaAS3JkTybD6oxP+HzWcULIyKwAA
+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
+P7rh/wHi80yqISsAAA==
 
 -->
 
