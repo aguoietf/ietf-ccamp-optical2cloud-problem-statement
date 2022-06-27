@@ -10,10 +10,10 @@
 <?rfc symrefs="yes"?>
 <?rfc comments="yes"?>
 
-<rfc ipr="trust200902" docName="draft-liu-ccamp-optical2cloud-problem-statement-01" category="std">
+<rfc ipr="trust200902" docName="draft-liu-ccamp-optical2cloud-problem-statement-02" category="std">
 
   <front>
-    <title abbrev="Cloud Optical Problem Statement">Problem Statement and Gap Analyis for Connecting to Cloud via Optical Networks</title>
+    <title abbrev="Cloud Optical Problem Statement">Problem Statement and Gap Analyis for Connecting to Cloud DCs via Optical Networks</title>
 
     <author initials="S." surname="Liu" fullname="Sheng Liu">
       <organization>China Mobile</organization>
@@ -50,9 +50,10 @@
 
 
 <t>Many applications, including optical leased line, cloud VR and computing cloud, benefit from the network
-   scenario where the data traffic to cloud data centers (DCs) is carried over optical network end to end.
-   This document describes the problem statement and requirements, and presents a gap analysis on existing
-   control plane protocols for supporting this network scenario.</t>
+   scenario where the data traffic to cloud data centers (DCs) is carried end-to-end over an optical network.
+   This document describes the problem statement and requirements for connecting to cloud DCs over optical
+   networks, and presents a gap analysis for existing control plane protocols for supporting this network
+   scenario.</t>
 
 
 
@@ -69,96 +70,138 @@
 <t>Cloud applications are becoming more popular and widely
    deployed in enterprises and vertical industries.  Organizations with
    multiple campuses are interconnected together with the remote cloud
-   for storage and computing.  Such cloud services demands the underlying
-   network to provide high quality experiences, such as high availability, 
+   for storage and computing.  Such cloud services demand that the underlying
+   network provides high quality of experience, such as high availability,
    low latency, on-demand bandwidth adjustments, and so on.</t>
 
-<t>Cloud services have been carried over IP/Ethernet-based aggregated networks for years. MPLS-based
-   VPNs with traffic engineering (TE) are usually used to achieve desired service quality. 
+<t>Cloud services have been carried over IP/Ethernet-based aggregated networks for years.  MPLS-based
+   VPNs with traffic engineering (TE) are usually used to achieve desired service quality.
    Provisioning and management of MPLS VPNs is known to be complicated and typically involves manual
-   TE configurations across the network.</t>
+   TE configuration across the network.</t>
 
-<t>To improve the performance and flexibility of the aggregated networks, OTN (Optical Transport Network)
-   networks are introduced to complement the IP/Ethernet-based aggregation networks to enable full-fiber
-   connections. This scenario is described in the Fifth Generation Fixed Network Architecture 
-   by the ETSI F5G ISG []. OTN can be used to provide high quality carrier services in addition to
-   the traditional MPLS VPN services. OTN provides TDM-based connections with no queueing or scheduling
-   needed, with an access bandwidth granularity of 1.25Gbps, i.e. ODU0 (Optical Data Unit) and above.
-   This bandwidth granularity is typically more than what a single application would demand. 
-   Therefore, user traffic usually needs to be aggregated before being carried forward through the network. However,
-   advanced OTN techonologies developed in ITU-T work items have aimed to enhance OTN to support even smaller granular services
-   with the introduction of the Optical Service Unit (OSU). 
-   This enhancement makes OTN an even more suitable solution for bearing cloud traffic with high quality and bandwidth granularity close
-   to what an IP/Ethernet-based network could offer.</t>
+<t>To improve the performance and flexibility of aggregated networks, Optical Transport Network (OTN)
+   technology is introduced to complement the IP/Ethernet-based aggregation networks to enable full-fiber
+   connections.  This scenario is described in the Fifth Generation Fixed Network Architecture
+   by the ETSI F5G ISG [].  OTN can be used to provide high quality carrier services in addition to
+   the traditional MPLS VPN services.  OTN provides Time Division Multiplexing (TDM) based connections
+   with no queueing or scheduling needed, with an access bandwidth granularity of 1.25Gbps, i.e.,
+   ODU0 (Optical Data Unit 0) and above.  This bandwidth granularity is typically more than what a
+   single application would demand, therefore, user traffic usually needs to be aggregated before
+   being carried forward through the network.  However, advanced OTN technologies developed in ITU-T
+   work items have aimed to enhance OTN to support services of smaller granularity with
+   the introduction of the Optical Service Unit (OSU).  These enhancements make OTN an even more
+   suitable solution for bearing cloud traffic with high quality and bandwidth granularity close to
+   what an IP/Ethernet-based network could offer.</t>
 
-<t>Many cloud-based services that require high bandwdith, deterministic service quality and flexible access could potentially
-   benefit from the network scenario of using OTN-based aggregation networks to interconnect cloud DCs. For example, intra-city Data Center Interconnects (DCIs), which communicate with each other to supports public and/or private cloud services, can use OTN for via intra-city DCI networks to ensure ultra-low latency and on-demand provisioning of large bandwidth connections for its Virtual Machine (VM) migration services. Another example is the high quality private line, which can be provided over OTN dedicated connections with high security and reliability for large enterprises such asfinancial, medical centers and education customers. Yet another example is the Cloud Virtual Reality (VR) services, which typcially requires high bandwidth (e.g. over 1Gbps for 4K or 8k VR) links with low latency (e.g. 10ms or less) and low jitter (e.g. 5ms or less) for rendering with satisfactory user experience. These network properties required for cloud VR services can be typically offered by OTN networks in high quality comparing with IP/Ethernet based networks.</t>
+<t>Many cloud-based services that require high bandwdith, deterministic service quality, and flexible
+   access could potentially benefit from the network scenario of using OTN-based aggregation networks
+   to interconnect cloud data centers (DCs).  For example, intra-city Data Center Interconnects (DCIs), which
+   communicate with each other to supports public and/or private cloud services, can use OTN for via
+   intra-city DCI networks to ensure ultra-low latency and on-demand provisioning of large bandwidth
+   connections for their Virtual Machine (VM) migration services.  Another example is the high quality
+   private line, which can be provided over OTN dedicated connections with high security and
+   reliability for large enterprises such as financial, medical centers, and education customers.  Yet
+   another example is the Cloud Virtual Reality (VR) services, which typcially require high bandwidth
+   (e.g., over 1Gbps for 4K or 8k VR) links with low latency (e.g., 10ms or less) and low jitter (e.g.,
+   5ms or less) for rendering with satisfactory user experience.  These network properties required
+   for cloud VR services can typically be offered by OTNs with higher quality comparing to
+   IP/Ethernet based networks.</t>
 
 <t><xref target="I-D.ietf-rtgwg-net2cloud-problem-statement"/> and
-   <xref target="I-D.ietf-rtgwg-net2cloud-gap-analysis"/> present a detailed analysis on
-   the coordination requirements between IP-based networks and cloud DCs. This document complements the analysis by further
-   examining the requirements and gaps when accessing cloud DCs through OTN networks, from the control plane perspective.
-   Data plane requirements are out of the scope of this document.</t>
+   <xref target="I-D.ietf-rtgwg-net2cloud-gap-analysis"/> present a detailed analysis of
+   the coordination requirements between IP-based networks and cloud DCs.  This document complements
+   that analysis by further examining the requirements and gaps from the control plane perspective when
+   accessing cloud DCs through OTNs.  Data plane requirements are out of the scope of this
+   document.</t>
 
-<section anchor="requirements-language" title="Requirements Language">
-<t>The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”,
-   “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “NOT RECOMMENDED”, “MAY”, and
-   “OPTIONAL” in this document are to be interpreted as described in BCP
-   14 <xref target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in all
-   capitals, as shown here.</t>
-
-</section>
 </section>
 <section anchor="requirements-and-gap-analysis" title="Requirements and Gap Analysis">
 
 <section anchor="multi-cloud-access" title="Multi-cloud Access">
 
-<t>Cloud services are deployed in geographically distributed means for scalability and resilliency 
-   considerations, and they are usually hosted by multiple interconnected data
-   centers (DCs). DCs are traditionally interconnected through Layer 2/3 switches or routers
-   with full mesh connectivity. To improve interaction
-   efficiency as well as service experience, OTN is also evaluated as an
-   option to be used for DC interconnection. This network scenario is illustrated in 
-   <xref target="fig-cloud-access-optical"/>.</t>
+<t>Cloud services are deployed in geographically distributed locations for scalability and resilliency,
+   and they are usually hosted by multiple interconnected DCs.  DCs have usually been interconnected
+   through Layer 2/3 switches or routers with full mesh connectivity.  To improve interaction
+   efficiency as well as service experience, OTN is also considered as an option for DC interconnection.
+   This network scenario is illustrated in <xref target="fig-cloud-access-optical"/>.</t>
 
-<figure title="Multi-cloud access through OTN Network" anchor="fig-cloud-access-optical"><artwork><![CDATA[
-      //------\\                                               /----\
-    ||Enterprise|\\                                          |Vertical|
-    ||   CPE    || \\        ------------          +-----+   /|Cloud |
-      \\------//     \ +---*/            \*---+    |Cloud| //  \----/
-                       |O-A|              |O-E|----+ GW  |/
-                       +---+              +---+    +-----+
-                      |      OTN Networks      |
-      //-----\\       ++---+              +---+    +-----+     /-----\
-    || Vertical||-----+ O-A|              |O-E|----+Cloud|---||Private||
-     |   CPE   |      +----*\            /*---+    | GW  |    | Cloud |
-      \\-----//              ------------          +-----+     \-----/
-
+<figure title="Multi-cloud access through an OTN" anchor="fig-cloud-access-optical"><artwork><![CDATA[
+      __________                                             ________
+     /          \                                           /        \
+    | Enterprise |          ___________                    | Vertical |
+    |    CPE     |\        /           \          +-----+ /|  Cloud   |
+     \__________/  \ +---+/             \+---+    |Cloud|/  \________/
+                    \|O-A*               *O-E|----+ GW  |
+                     +---+               +---+    +-----+
+       ________          |       OTN     |                    _______
+      /        \     +---+               +---+    +-----+    /       \
+     | Vertical |----+O-A*               *O-E|----+Cloud|---| Private |
+     |   CPE    |    +---+\             /+---+    | GW  |   | Cloud   |
+      \________/           \___________/          +-----+    \_______/
+ 
 ]]></artwork></figure>
 
 <t>A customer application is connected to the cloud via one of the Customer Premises
-   Equipment (CPE), and access cloud services that are typically hosted in multiple clouds
-   attached to different cloud gateways. L2VPN or L3VPN are used as overlay services
-   on OTN network to support multi-cloud access. Serving as an overlay, the OTN networks should
-   provide the capability of creating different types of connections, including 
-   point-to-point(P2P), point-to-multipoint(P2MP) and multipoint-to-multipoint (MP2MP) connections to support
+   Equipment (CPE), and access cloud services are hosted in multiple clouds that are
+   attached to different cloud gateways.  Layer 2 or Layer 3 Virtual Private Networks
+   (L2VPN or L3VPN) are used as overlay services on top of the OTN to support
+   multi-cloud access.  Serving as an overlay, the OTNs should provide the
+   capability to create different types of connections, including point-to-point (P2P),
+   point-to-multipoint (P2MP) and multipoint-to-multipoint (MP2MP) connections to support
    diverse L2VPN or L3VPN services.</t>
 
-<t>OTN connections were point-to-point by nature on the data plane. To support P2MP and MP2MP services, multiple 
-   P2P OTN connections can be established between each source and destination pair. The routing and signaling protocols for OTN need to coordinate these OTN connections to ensure they are routed with proper diverse paths to meet resilliency and path quality constraints.</t>
+<t>In the data plane, OTN connections are P2P by nature.  To support P2MP and MP2MP services,
+   multiple P2P OTN connections can be established between each source and destination pair.
+   The routing and signaling protocols for OTN need to coordinate these OTN connections to
+   ensure they are routed with proper diverse paths to meet resilliency and path quality
+   constraints.</t>
 
-<t><xref target="RFC4461"/> defines the requirements for establishing P2MP MPLS label switched paths (LSPs). <xref target="RFC6388"/> describes
-   extensions to the Label Distribution Protocol (LDP) for the setup of P2MP and MP2MP LSPs in MPLS Networks. The generic
-   rules introduced by these work also apply to OTN networks, however, proper protocol extensions are missing and required for establishing P2MP and MP2MP connetctions with OTN resources, i.e. time slots.</t>
+<t><xref target="RFC4461"/> defines the requirements for establishing P2MP MPLS traffic engineering label
+   switched paths (LSPs).  <xref target="RFC6388"/> describes extensions to the Label Distribution Protocol
+   (LDP) for the setup of P2MP and MP2MP LSPs in MPLS Networks.  The generic rules introduced
+   by those documents work also apply to OTNs, however, the protocol extensions are
+   missing and are required for establishing P2MP and MP2MP connetctions with OTN resources,
+   i.e., time slots.</t>
 
 </section>
 <section anchor="service-awareness" title="Service-awareness">
 
-<t>Cloud-oriented services are dynamic in nature with frequent changes in bandwidth and quality-of-service (QoS) requirements. However, in typical OTN network scenarios, OTN connections are typically preconfigured between provider edge (PE) nodes, and client traffic like IP or Ethernet are fixed mapped onto the payload of OTN frames at the ingress PE node. This makes the OTN connections rather static and cannot accommodate the dynamicity of the traffic, resulting in slow and inefficient use of the OTN bandwidth resources. To address this issue to make the OTN network more suitable for carrying cloud-oriented services, it needs to be able to understand the type of traffic and their QoS requirements, so that OTN connections can be dynamically built and selected with the best feasible paths. The mapping of client services to OTN connections should also be dynamically configured or modified to better adapt to the traffic changes.</t>
+<t>Cloud-oriented services are dynamic in nature with frequent changes in bandwidth and quality
+   of service (QoS) requirements.  However, in typical OTN scenarios, OTN connections are
+   preconfigured between provider edge (PE) nodes, and client traffic like IP or Ethernet is
+   fixed-mapped onto the payload of OTN frames at the ingress PE node.  This makes the OTN
+   connections rather static and they cannot accommodate the dynamicity of the traffic unless
+   they are permanently over-provisioned, resulting in slow and inefficient use of the OTN
+   bandwidth resources.  To address this issue and to make the OTN more suitable for carrying
+   cloud-oriented services, it needs to be able to understand the type of traffic and its QoS
+   requirements, so that OTN connections can be dynamically built and selected with the best
+   feasible paths.  The mapping of client services to OTN connections should also be dynamically
+   configured or modified to better adapt to the traffic changes.</t>
 
-<t>New service-aware capabilties are needed for both the control plane and data plane to address this challenge for OTN networks. On the data plane, new hardware that can examine cloud traffic contents such as the IP header (destination IP address and/or the TOS field), VRF ids or layer 2 VLAN ids are introduced to make the PE node capable of sensing the type of traffic. This work for data plane are out of the scope of this document.</t>
+<t>New service-aware capabilties are needed for both the control plane and data plane to address
+   this challenge for OTNs.  In the data plane, new hardware that can examine cloud traffic
+   packet header fields (such as the IP header destination IP address and/or the type of service
+   (TOS) field, virtual routing and forwarding (VRF) identifiers, or layer 2 virtual laocal area
+   network (VLAN) identifiers) are introduced to make the PE node able to sense the type of
+   traffic.  This work for the data plane is out of the scope of this document.</t>
 
-<t>Upon examinining the cloud traffic contents and obtain client inforamtion such as cloud destination and QoS requirements, the PE node needs to forward such information to the control entity of the OTN network to make decisions on connection configurations. The client information could include but not limited to, destination IP addresses, type of cloud service, and QoS information such as bandwidth, latency bound and resiliency factors.The control entity may be an SDN controller or a control plane instance; in the former case communications are established between each of the PE nodes and the controller and the controller serves as a central authority for OTN connection configurations; whereas in the latter all of the PE nodes need to disseimate client information between each other using control plane protocols or possibly through some intermediate reflectors. It is desirable that the protocols used for both cases are consistent, and ideally, the same. A candidate protocol is the PCEP <xref target="RFC5440"/> protocol defined in the PCE working group, but there is currently no extensions defined for describing such client traffic information. Extensions to the PCEP protocol can be defined outside this document to support the use case. It is also possible to use the BGP Link State (BGP-LS) protocol <xref target="RFC7752"/> to perform the distribution of client information. However typically an OTN PE node does not run BGP protocols due to its heavy weight and complexity. Therefore, PCEP seems to be a better protocol choice in this case.</t>
+<t>Upon examinining the cloud traffic header fields and obtaining client inforamtion such as the
+   cloud destination and QoS requirements, the PE node needs to forward such information to the
+   control entity of the OTN to make decisions on connection configurations.  The client
+   information could include, but is not limited to, the destination IP addresses, type of cloud
+   service, and QoS information such as bandwidth, latency bounds, and resiliency factors.  The
+   control entity may be an SDN controller or a control plane instace: in the former case
+   communications are established between each of the PE nodes and the controller, and the
+   controller serves as a central authority for OTN connection configurations; whereas in the
+   latter case, all of the PE nodes need to disseimate client information to each other using
+   control plane protocols or possibly through some intermediate reflectors.  It is desirable
+   that the protocols used for both cases are consistent, and ideally, the same.  A candidate
+   protocol is the PCE communication Protocol (PCEP) <xref target="RFC5440"/>, but there are currently no
+   extensions defined for describing such client traffic information.  Extensions to PCEP could
+   be defined outside this document to support the use case.  It is also possible to use the BGP
+   Link State (BGP-LS) protocol <xref target="RFC7752"/> to perform the distribution of client information.
+   However, an OTN PE node does not typically run BGP protocols due to its heavy weight and
+   complexity. Therefore, PCEP seems to be a better protocol choice in this case.</t>
 
 </section>
 </section>
@@ -186,34 +229,6 @@
     <references title='Normative References'>
 
 
-
-
-
-<reference anchor='RFC2119' target='https://www.rfc-editor.org/info/rfc2119'>
-<front>
-<title>Key words for use in RFCs to Indicate Requirement Levels</title>
-<author fullname='S. Bradner' initials='S.' surname='Bradner'><organization/></author>
-<date month='March' year='1997'/>
-<abstract><t>In many standards track documents several words are used to signify the requirements in the specification.  These words are often capitalized. This document defines these words as they should be interpreted in IETF documents.  This document specifies an Internet Best Current Practices for the Internet Community, and requests discussion and suggestions for improvements.</t></abstract>
-</front>
-<seriesInfo name='BCP' value='14'/>
-<seriesInfo name='RFC' value='2119'/>
-<seriesInfo name='DOI' value='10.17487/RFC2119'/>
-</reference>
-
-
-
-<reference anchor='RFC8174' target='https://www.rfc-editor.org/info/rfc8174'>
-<front>
-<title>Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</title>
-<author fullname='B. Leiba' initials='B.' surname='Leiba'><organization/></author>
-<date month='May' year='2017'/>
-<abstract><t>RFC 2119 specifies common key words that may be used in protocol  specifications.  This document aims to reduce the ambiguity by clarifying that only UPPERCASE usage of the key words have the  defined special meanings.</t></abstract>
-</front>
-<seriesInfo name='BCP' value='14'/>
-<seriesInfo name='RFC' value='8174'/>
-<seriesInfo name='DOI' value='10.17487/RFC8174'/>
-</reference>
 
 
 
@@ -367,104 +382,104 @@
   </back>
 
 <!-- ##markdown-source:
-H4sIAN8RumIAA5VabXPbRpL+rl8xZ3+REoKyFXuT9dbWRZFkR3V64Vqyt7Lr
-rashMCQnBjFYDCCGiXy//Z7ungEGlLTZdVUiEpzp7umXp18GWZbt5a6w1fKN
-6tpF9t3eXmvb0rxRs8bNS7NWN61uzdpUrdJVod7pWh1XutxarxauUSeuqkze
-Yr9qnTopXVeoO6vVdd3aXJfqyrQb13z2e3t6Pm/M3ZuwJv7+gMte4fJKryFA
-0ehFm5W2y/Jcr+vMyZajnAhktWzMfNyYvXi5R6yWjetqsDk5vpypv+IByfaO
-Hu7lWLp0zfaN8m2xZ+vmjWqbzrdHL1788cXR3h5oVcX/6tJVYL81fq+2b9Tf
-W5dPlHdN25iFx6ftWj7kbk18/T9wtq5duebNnlIZ/lNKDnCzMmB9YTt+5hqo
-+GRlK60u3dyWhp+atbblG4VTelq9Kb/PacmaV0zBYofmj9qtra7U32j1QPfH
-Tm+MVbcmX1WudEsL4RPyv9LqlWz9fsVrH6F9bPGTete5ge7bru0a869Ia9q0
-7NzUmnbx/ZIePkL6Jw1N/A0S/L4qfsWqLZZvf94+0MVelmVKz33b6Lzdo12X
-utoqXdclXKO1roJdbJWXHXm0Ch6jSqO9KaDkysBs7H8f37M7g2jdsffy44ma
-m8osbKsWjVurdmVUJQ5MvHxuKt1YpzYr0xj+tdCthg/pxcLmFABCnJ9icWsa
-r/ZPT/yBQrjkumksxHB3pulFC+SVgTDYjz9TYnW7wgZEQseBVxifN3ZuPPMM
-nq/8KDAb88/ONvwdOqAndWM8fVNaLRG1mqLWg6yrlPnFejo1scpd1TauVHWp
-KyYOf3elRLfv6hqOz9FNEkVpoyamYpG1LQoYce+5OidaRZeTKdg+Eu2pgZSG
-7uYGmieya4dvtau7Ujcs9cYWptzS1sLUpdtCYRYCky7rxnrogFZBhaI/WxUI
-YOjVT5W6bpa6sr8GPhvbrojOuitbW5dGEYp0TAE8LVHMBb0M6X5poNyGd7Ga
-oUvXGrEokWF9tK7RSzN2HTC+6fJVsL03zZ3NwaSAP1eFmKyrCtMAM0XjUYuw
-N9R9hwOrlV2u1D87Xdp2C+vUBieqQAVwQ6S1lxX6DiGiEQ5YNlFEq3QbVcIP
-qhwPXJUJVzXH/6BJHEUXP0NBiVt4h3XTxDi9xCt9R5Yx1dhVz2eHZ6QaiJ3N
-OZD0ctmYpSa9hbOIu2yNbmCHy9nFjawkJh9nVz5oNcQJsAiRiCPC/vu3Zwds
-j87j9OUWf9kaSiP2DeSB78OteymjkqZ8+hmpz8PaRIoOh8PDPhwUbsGCCH/4
-7ufKbSqiPDdsO3ZIOgxF3rYmbwJ7W9258g7KACVw4lg8oxhZ2GXXRA/OG+d9
-Cg+iz1un7JpMKuAAK0IrIJSLxyxKxJ0Yj6SjJY9ocqKub6/UfkyQt42uPAVh
-TKUHiQv1rsxBJ4rjs4kKiMPT1sNRBjqMPRq4ohZdWWYLoE0T0IHzO449FVTq
-UZAQKgATxyhxe2sXMPQ7gKjoCg9+wa9BdHXcwKot6CGpsAHnW952dntzrt6+
-fqfOb96pv/9jyirIkebmpneIR0NFHLUZfBhy6KKwzLvlbEP04XnyDAqNTtHv
-EW6BvFe3p5dBUcnZxYErB8amM5xbwDRfmaIr+6g2hUEG4ZUQXeeg7ZNIXMKS
-BHPB/C+nR6/fzWtKWFMDGU4/vBisfkoZ5ENl2wP2HD2HTw2J4XGa+GHwY8bV
-dgU5NiuNDKE8xIR1EyRWG9eVRcApiadbSmzwWaRJqL3pIzYGJ53RhxhKXHfO
-e/CHE2nADjza6AamW6H2Wq5G0aJ+dBsEdzMhprq4oxAp2AxwjpWLdQZkuzOl
-q8W/zm8/ZLeK/Qg+tA54pe3ahNS54khjKi6mLgUKlfJriI/zRHX1tif+PeLb
-JHnFAI0GuQnwQzaBmW4+HESNQe2BNcfcWn+G4CQEdM/M2RS+sy2Hl3dlxwwI
-MOcAzL746LXNAo3cfAzpqdGx03P51Lpg6eqRkI8ZJ2eLu8XCNNOhfJKCWlb2
-gdQSsVBUiDAsAMJoNYFdkDyRv6mKyHehOcE6cjgJA+FcI6NWrSVf4uh/otga
-MAZW6MhzSaG/A19pQg8KReU1VW+hZ/OLJlCcsIl1lpOUHGInXFhQ2dLv5Yrt
-3B8gkleW0jrK/K7iZCGWMUhNynGxMPiZV3U3R2TR4Q/BEbXKnY7lQ6/VCYMa
-QosdhDyAeqVUqJPzHUz2BJWoYLAiyfWs4yHd12kehM7gHKhSBo9JkYy4Wsj7
-0TZtR3hImRaV3/7HywNUcssA3AM6Hldy2KBExpnVDg7H40qJHRQn+B2ANRQT
-dG58Cbn3AcIyUW/yromO1JjShoqHRZejpfVgqJAWaBWqHL41UWtmUPYlONEB
-UgfYy1EPubWhSuUnQwHz6PGkNopKem/knPsf3x8k1pSDAnVz9ukYLz4JGNb/
-vpmiTGQFvCTM55O8+h9KIt99VkQTivscdJCaWTa+fAG0o7MjkiQh0JqfbUu+
-K0tepyuIemOo5iR/YKIeZ/cLdE1ofwXbhyqTEjtahT76YLGa6mucIxyI0Xzo
-nHqQCCYe0g5DC2WELVu6d2XA9zhvo0jRg3QJYqkRYnmBqd9+++/z7JRbzKxp
-l5tlht+fGgR8+UIq+r1taImy2BJhR2iWkCiBbSiyuTDsG6ZYR+TONegsxY/S
-jgtaaDdUOZ/PxpArzpfA0bizG4o18bqeJxS46BrSCfEm37SVtGFmzJjI4yye
-mtJYdAwpBSz7BJwaZDJg7k7/h7ioKSRDvcEoKT+N2QKVXNfGNOlzuIx8SY4H
-4z1/jthJ9l2gs+9QoodqQ302W0rpqCqeXX64uX02kb/q6po/vz/7y4fz92en
-9Pnmx+OLi/6DrCAy+H794SIsoU/D5pPry8uzq1PZj6dq59Hl8U/PJtFbnl3P
-bs+vr44vnkk1m9qJjitljxXkMdw67FTAP5zMiNDLV/C8/3r/9uTo5cs/wrfk
-y3cvv32FL2SmSYBvBIx8hQp5ioFygCvYkhuPXNcoGkrq24ByK2pfqD4jrY6V
-OhrMwXtY7ZfU9mbiBsfsFo/1fHSwtNFeGocMUK9CPBeWmut5R6ddGx3Sh8eP
-EZMFo70tS8uIFZoGD8hv4kSGWyw+YtLorZxvBSn6Bn2nJ6cxCpNLJylT9mm2
-x1DUc+M27ueD01/oLbDu6PAb5YE0KNgZJvEbUeyrP+p5cD4/ZMo77jGTho7p
-axlsUERSpSYnhnE2BvvJSKESGrBVujm4EuyIdH6ny04H19FMiAZBLval3OuQ
-hk9PRgfCioAcDyokPIPuaQbCdGFCQT70q2L8TDAhjk+/fIH//B/+8cxNqcPD
-jP99+qT+s3+87xNTub8/6/Px/X9C6P5jmOPcBzrkoLOz8HmglCX/ht1f8/ev
-SZZ7cev7cKhPn2Tt4aF85aVfHaasP30V9irZe69oMe873HtK3Ovs+P7Bo7N7
-EePdX/H1yb1fR3aPPAoHeWJr4Eh+FKfp4YexCXt1ff1v8JKNWWpD1RvjPqz5
-V8cVpeHT/f1Mir/7IM9gxPuBd/bVyC0OB+2L3uTjo1Y8HNnt950hWBFmFD//
-7Y16/lQ0KL7s+POzFCxDx5KmzaD3Z18YQo/7EnLUTtOIN5knSnLtL0RcZWKy
-PIm7ZwBwKmGJ6BnwvOZcsw/lHQhoxuZpjNncmjEC9nVXAFNE/zDtpE1MWret
-plEFCVVYrtCq2CJRA7/RWxQmF0c0FAH2XHxDHwSqBamocC31dtQ148BJQZF2
-3OsHupxK+0wzOoK9SG8iHXZaJyLLoU8k+nHcw1rUtR7mZnljNI+kh7NAEQTs
-i7ShSC8CmKADomaty/jD/uxoBiX3D0Vt4ZfLmVTZw8PxErV/KYvS/mXQAA+v
-UUA1qKl3tNp3VexIPOVKWyDDw/BUTsqPqDepCXTVcOXAFRnnp6h1EoiFZtGS
-HqV3CB6YHs0ecA1FvPE0oLB+xQMdqWa51fWua8IEE9VOG8vfWtuGOwfOpnEA
-6+0S+Zi+jW8SxMpxQhmqaLZuaIZ3VBka375q4IxdSLaW/qRXca3bFe9ZG9OO
-ahFujfFr0nZUlCih176xoNLs1as/vERpVhj0kOGSZVTs0gF69dDZWMU8SEQd
-ZMpYWxRBlv2LmxlVKkL9D9989x1TD5c4UtCjv/PxsMTwggmdxnqLNDwLGgS9
-05l0dVxrm7arydl3TE5MCQFYrpgpxEJLGsjanDg3Xclj0n5kLCNY6JHjmMsU
-QrUtCTZuGVZhaBcNEC2cnoZsBUzz0R9GDeRDHQ7Ss/3bdBZAzGFN9r44JW3t
-GgooHdlPUZUb5nKZ3oBzRUUuztjXuZmjKqw1uwXvtkI/lZOyQmxJFUjCMjSu
-0KXIMDm5SIGowY8yt8hiqbf/F3dzMHKXYbrJfYRg9AgsY/EWZv2p649hHX1G
-vHpIojJAI/RZLCEAsoWqXGFCoZ2T87f9MLG0n+kSgCCob7GJyYIH82tqOqgV
-CV5Y623pNI0IZULV6DXprA3z0WVD6Qi5nfiFilQGnhHJ07OgIqXBCjXmMhgj
-qKlcS1nBrdeuCAgQ7ZHciwTpJ+QAhF/wF+jS09iD6CBMQ/3d8jQtDmshwGCw
-3ncYJ3VRNJLWqWL2vuOGjoTfzUI7A1uefOim2fZd9UOvgqXb8XCcduIjX/zx
-awVyrG3okoNxwnPbKHjRzhWud5Lon4DroDN2k3lnS7kF9qaU+qMfagNwWrUw
-2vM0lvFJMIFMH8aFwWWGAsM94CqJWeBhh3vioVAVzGoXVoAeDksTKl3ouo04
-F48eYmwa4/XKbKIAEswx6/Mcir7LBYvMzV043Xh4wSlqGFi0O1YHy7I04Jpk
-pIiS17vJdYIfN2qlm4KFYVOQ6mUUY3ZG9iQHp4p4XStXb+jXNQXqfpo48TiK
-FYbFtPj2+gYxacoCVcnH92+VLWSgJ/2r+nhxfMXPHl749T4c4lIUV7KjecLl
-MDbacb4QvuzxpI9Ecf/ucAdm+1C7qh9PRU5P6IaHHvMW6Td6nK3AWa9l4Bw0
-F16hSBRG+x7GR3riPvTipRMTY+prHfvr1F/oFmJAm51ClhVamNxKSqORcR8J
-O1fBEkrpaQI/ue+QChRBCGUS8JV2baU7mKjHXYKwJBpqVPZPejWkbKLSetSb
-9KPjueuqYhjPSEUkE2A/vX2oizUKfEKuSt2cXsUf6dIMvqF3As1WhGm5+VO8
-9yWJDOGkN8mFSZ/RnqwtgwGCHX0ExJT9I49IJbSYXm2h4VCD/CqvYMVbgjF8
-7RjtT/ICj/ZReqiMcaosHwgUa9YCKcPYtVzpPLD2+Eyc9eTa6qmXa+iGyHnC
-5G3faHr0hDL1ofsL4tSYBcE5GUydt+HC3TaSXFYhKw9E++kRwyPZQrTP4zhP
-MShOhNqBgFtCyCPDT6mlxS+WM3Jf1oWbkNnJ2SyUsq9fvXrBw/KwQirm/vYf
-KxlP6OT8Gt6EPb/l16UIgLuG2jW6SHZp0RjJMAxJmUwkvLxVMypnEq1P1dmD
-Kppl7cWLqTKQB6R5aSnT0W7SufKrOuTBUF3UOGe8YCtJ6V7Q9od3KLlt9Vle
-XVT7+J5doBTsuYvKvv329RFURi8wyOsgkmfSOn/IwKPThSoyKQe19NwR9QpH
-DgpYabqKxRlcoZDyhu75kILutmgt7XLV9i8u0e0sDziHC39WnTd0sR5qmJi/
-B32uHJW8cTrOaqJh9CW/dRNb9JPR9FdejPnhlNbdxIu9p5ecH18dP/rzyGb9
-PRv8iHfo8IqKvI821/nnPZr7VN16TvdRf362gB0NzW+eq+OcXgUqUTxzJhm4
-P7rh/wHi80yqISsAAA==
+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
 
 -->
 
