@@ -30,6 +30,23 @@ author:
     org: China Mobile
     email: zhaoyangyjy@chinamobile.com
 
+normative:
+  ETSI.GR.F5G.001:
+    title: Fifth Generation Fixed Network (F5G);F5G Generation Definition Release 1
+    author:
+      org: European Telecommunications Standards Institute (ETSI)
+    date: December 2020
+    seriesinfo: ETSI GR F5G 001
+    target: https://www.etsi.org/deliver/etsi_gr/F5G/001_099/001/01.01.01_60/gr_F5G001v010101p.pdf
+
+  ITU-T.SG15.Q11/15.WI.G.osu:
+    title: Optical Service Unit (OSU) Path Layer Network
+    author:
+      org: ITU-T SG15
+    date: December 2020
+    seriesinfo: ITU-T SG15 Q11/15 WI G.osu
+    target: https://www.etsi.org/deliver/etsi_gr/F5G/001_099/001/01.01.01_60/gr_F5G001v010101p.pdf
+
 --- abstract
 
    Many applications, including optical leased line, cloud VR and computing cloud, benefit from the network
@@ -57,14 +74,14 @@ author:
    To improve the performance and flexibility of aggregated networks, Optical Transport Network (OTN)
    technology is introduced to complement the IP/Ethernet-based aggregation networks to enable full-fiber
    connections.  This scenario is described in the Fifth Generation Fixed Network Architecture
-   by the ETSI F5G ISG [].  OTN can be used to provide high quality carrier services in addition to
+   by the ETSI F5G ISG {{ETSI.GR.F5G.001}}.  OTN can be used to provide high quality carrier services in addition to
    the traditional MPLS VPN services.  OTN provides Time Division Multiplexing (TDM) based connections
    with no queueing or scheduling needed, with an access bandwidth granularity of 1.25Gbps, i.e.,
    ODU0 (Optical Data Unit 0) and above.  This bandwidth granularity is typically more than what a
    single application would demand, therefore, user traffic usually needs to be aggregated before
    being carried forward through the network.  However, advanced OTN technologies developed in ITU-T
    work items have aimed to enhance OTN to support services of smaller granularity with
-   the introduction of the Optical Service Unit (OSU).  These enhancements make OTN an even more
+   the introduction of the Optical Service Unit (OSU) {{ITU-T.SG15.Q11/15.WI.G.osu}}.  These enhancements make OTN an even more
    suitable solution for bearing cloud traffic with high quality and bandwidth granularity close to
    what an IP/Ethernet-based network could offer.
  
@@ -174,8 +191,9 @@ author:
    extensions defined for describing such client traffic information.  Extensions to PCEP could
    be defined outside this document to support the use case.  It is also possible to use the BGP
    Link State (BGP-LS) protocol {{!RFC7752}} to perform the distribution of client information.
-   However, an OTN PE node does not typically run BGP protocols due to its heavy weight and
-   complexity. Therefore, PCEP seems to be a better protocol choice in this case.
+   However, an OTN PE node does not typically run BGP protocols due to that BGP lacks protocol
+   extensions to support optical networks. Therefore, PCEP seems to be a better protocol choice
+   in this case.
  
 # Manageability Considerations
  
@@ -183,8 +201,14 @@ author:
  
 # Security Considerations
  
-   TBD
- 
+   This document analyzes the requirements and gaps in connecting to cloud DCs over optical networks
+   without defining new protocols or interfaces. Therefore, this document introduces no new security
+   considerations to the control or management plane of OTN. Risks presented by existing OTN control
+   plane are described in {{!RFC4203}} and {{!RFC4328}}, and risks presented by existing northbound and
+   southbound control interfaces in general are described in {{!RFC8453}}. Moreover, the data communication
+   network (DCN) for OTN control plane protocols are encapsulated in fibers, which providers a much
+   better security environment for running the protocols.
+
 # IANA Considerations
  
    This document requires no IANA actions.

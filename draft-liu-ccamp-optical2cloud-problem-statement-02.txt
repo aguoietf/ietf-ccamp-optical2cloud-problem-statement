@@ -5,12 +5,12 @@
 CCAMP Working Group                                               S. Liu
 Internet-Draft                                              China Mobile
 Intended status: Standards Track                                H. Zheng
-Expires: 30 December 2022                            Huawei Technologies
+Expires: 31 December 2022                            Huawei Technologies
                                                                   A. Guo
                                                   Futurewei Technologies
                                                                  Y. Zhao
                                                             China Mobile
-                                                            28 June 2022
+                                                            29 June 2022
 
 
    Problem Statement and Gap Analyis for Connecting to Cloud DCs via
@@ -42,7 +42,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 December 2022.
+   This Internet-Draft will expire on 31 December 2022.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Liu, et al.             Expires 30 December 2022                [Page 1]
+Liu, et al.             Expires 31 December 2022                [Page 1]
 
 Internet-Draft       Cloud Optical Problem Statement           June 2022
 
@@ -79,8 +79,8 @@ Table of Contents
    6.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   6
      6.1.  Normative References  . . . . . . . . . . . . . . . . . .   6
      6.2.  Informative References  . . . . . . . . . . . . . . . . .   7
-   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .   7
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   7
+   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .   8
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   8
 
 1.  Introduction
 
@@ -102,26 +102,27 @@ Table of Contents
    Optical Transport Network (OTN) technology is introduced to
    complement the IP/Ethernet-based aggregation networks to enable full-
    fiber connections.  This scenario is described in the Fifth
-   Generation Fixed Network Architecture by the ETSI F5G ISG [].  OTN
-   can be used to provide high quality carrier services in addition to
-   the traditional MPLS VPN services.  OTN provides Time Division
-   Multiplexing (TDM) based connections with no queueing or scheduling
+   Generation Fixed Network Architecture by the ETSI F5G ISG
+   [ETSI.GR.F5G.001].  OTN can be used to provide high quality carrier
+   services in addition to the traditional MPLS VPN services.  OTN
+   provides Time Division Multiplexing (TDM) based connections with no
 
 
 
-Liu, et al.             Expires 30 December 2022                [Page 2]
+Liu, et al.             Expires 31 December 2022                [Page 2]
 
 Internet-Draft       Cloud Optical Problem Statement           June 2022
 
 
-   needed, with an access bandwidth granularity of 1.25Gbps, i.e., ODU0
-   (Optical Data Unit 0) and above.  This bandwidth granularity is
-   typically more than what a single application would demand,
-   therefore, user traffic usually needs to be aggregated before being
-   carried forward through the network.  However, advanced OTN
-   technologies developed in ITU-T work items have aimed to enhance OTN
-   to support services of smaller granularity with the introduction of
-   the Optical Service Unit (OSU).  These enhancements make OTN an even
+   queueing or scheduling needed, with an access bandwidth granularity
+   of 1.25Gbps, i.e., ODU0 (Optical Data Unit 0) and above.  This
+   bandwidth granularity is typically more than what a single
+   application would demand, therefore, user traffic usually needs to be
+   aggregated before being carried forward through the network.
+   However, advanced OTN technologies developed in ITU-T work items have
+   aimed to enhance OTN to support services of smaller granularity with
+   the introduction of the Optical Service Unit (OSU)
+   [ITU-T.SG15.Q11_15.WI.G.osu].  These enhancements make OTN an even
    more suitable solution for bearing cloud traffic with high quality
    and bandwidth granularity close to what an IP/Ethernet-based network
    could offer.
@@ -164,8 +165,7 @@ Internet-Draft       Cloud Optical Problem Statement           June 2022
 
 
 
-
-Liu, et al.             Expires 30 December 2022                [Page 3]
+Liu, et al.             Expires 31 December 2022                [Page 3]
 
 Internet-Draft       Cloud Optical Problem Statement           June 2022
 
@@ -221,7 +221,7 @@ Internet-Draft       Cloud Optical Problem Statement           June 2022
 
 
 
-Liu, et al.             Expires 30 December 2022                [Page 4]
+Liu, et al.             Expires 31 December 2022                [Page 4]
 
 Internet-Draft       Cloud Optical Problem Statement           June 2022
 
@@ -277,7 +277,7 @@ Internet-Draft       Cloud Optical Problem Statement           June 2022
 
 
 
-Liu, et al.             Expires 30 December 2022                [Page 5]
+Liu, et al.             Expires 31 December 2022                [Page 5]
 
 Internet-Draft       Cloud Optical Problem Statement           June 2022
 
@@ -291,8 +291,9 @@ Internet-Draft       Cloud Optical Problem Statement           June 2022
    this document to support the use case.  It is also possible to use
    the BGP Link State (BGP-LS) protocol [RFC7752] to perform the
    distribution of client information.  However, an OTN PE node does not
-   typically run BGP protocols due to its heavy weight and complexity.
-   Therefore, PCEP seems to be a better protocol choice in this case.
+   typically run BGP protocols due to that BGP lacks protocol extensions
+   to support optical networks.  Therefore, PCEP seems to be a better
+   protocol choice in this case.
 
 3.  Manageability Considerations
 
@@ -300,7 +301,16 @@ Internet-Draft       Cloud Optical Problem Statement           June 2022
 
 4.  Security Considerations
 
-   TBD
+   This document analyzes the requirements and gaps in connecting to
+   cloud DCs over optical networks without defining new protocols or
+   interfaces.  Therefore, this document introduces no new security
+   considerations to the control or management plane of OTN.  Risks
+   presented by existing OTN control plane are described in [RFC4203]
+   and [RFC4328], and risks presented by existing northbound and
+   southbound control interfaces in general are described in [RFC8453].
+   Moreover, the data communication network (DCN) for OTN control plane
+   protocols are encapsulated in fibers, which providers a much better
+   security environment for running the protocols.
 
 5.  IANA Considerations
 
@@ -309,6 +319,41 @@ Internet-Draft       Cloud Optical Problem Statement           June 2022
 6.  References
 
 6.1.  Normative References
+
+   [ETSI.GR.F5G.001]
+              European Telecommunications Standards Institute (ETSI),
+              "Fifth Generation Fixed Network (F5G);F5G Generation
+              Definition Release 1", ETSI GR F5G 001 , December 2020,
+              <https://www.etsi.org/deliver/etsi_gr/
+              F5G/001_099/001/01.01.01_60/gr_F5G001v010101p.pdf>.
+
+
+
+
+
+
+
+Liu, et al.             Expires 31 December 2022                [Page 6]
+
+Internet-Draft       Cloud Optical Problem Statement           June 2022
+
+
+   [ITU-T.SG15.Q11_15.WI.G.osu]
+              ITU-T SG15, "Optical Service Unit (OSU) Path Layer
+              Network", ITU-T SG15 Q11/15 WI G.osu , December 2020,
+              <https://www.etsi.org/deliver/etsi_gr/
+              F5G/001_099/001/01.01.01_60/gr_F5G001v010101p.pdf>.
+
+   [RFC4203]  Kompella, K., Ed. and Y. Rekhter, Ed., "OSPF Extensions in
+              Support of Generalized Multi-Protocol Label Switching
+              (GMPLS)", RFC 4203, DOI 10.17487/RFC4203, October 2005,
+              <https://www.rfc-editor.org/info/rfc4203>.
+
+   [RFC4328]  Papadimitriou, D., Ed., "Generalized Multi-Protocol Label
+              Switching (GMPLS) Signaling Extensions for G.709 Optical
+              Transport Networks Control", RFC 4328,
+              DOI 10.17487/RFC4328, January 2006,
+              <https://www.rfc-editor.org/info/rfc4328>.
 
    [RFC4461]  Yasukawa, S., Ed., "Signaling Requirements for Point-to-
               Multipoint Traffic-Engineered MPLS Label Switched Paths
@@ -326,25 +371,28 @@ Internet-Draft       Cloud Optical Problem Statement           June 2022
               Paths", RFC 6388, DOI 10.17487/RFC6388, November 2011,
               <https://www.rfc-editor.org/info/rfc6388>.
 
-
-
-
-
-
-
-
-Liu, et al.             Expires 30 December 2022                [Page 6]
-
-Internet-Draft       Cloud Optical Problem Statement           June 2022
-
-
    [RFC7752]  Gredler, H., Ed., Medved, J., Previdi, S., Farrel, A., and
               S. Ray, "North-Bound Distribution of Link-State and
               Traffic Engineering (TE) Information Using BGP", RFC 7752,
               DOI 10.17487/RFC7752, March 2016,
               <https://www.rfc-editor.org/info/rfc7752>.
 
+   [RFC8453]  Ceccarelli, D., Ed. and Y. Lee, Ed., "Framework for
+              Abstraction and Control of TE Networks (ACTN)", RFC 8453,
+              DOI 10.17487/RFC8453, August 2018,
+              <https://www.rfc-editor.org/info/rfc8453>.
+
 6.2.  Informative References
+
+
+
+
+
+
+Liu, et al.             Expires 31 December 2022                [Page 7]
+
+Internet-Draft       Cloud Optical Problem Statement           June 2022
+
 
    [I-D.ietf-rtgwg-net2cloud-gap-analysis]
               Dunbar, L., Malis, A. G., and C. Jacquenet, "Networks
@@ -386,14 +434,6 @@ Authors' Addresses
    Email: aihuaguo.ietf@gmail.com
 
 
-
-
-
-Liu, et al.             Expires 30 December 2022                [Page 7]
-
-Internet-Draft       Cloud Optical Problem Statement           June 2022
-
-
    Yang Zhao
    China Mobile
 
@@ -405,44 +445,4 @@ Internet-Draft       Cloud Optical Problem Statement           June 2022
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Liu, et al.             Expires 30 December 2022                [Page 8]
+Liu, et al.             Expires 31 December 2022                [Page 8]

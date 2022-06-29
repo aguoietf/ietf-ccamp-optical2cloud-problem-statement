@@ -40,7 +40,7 @@
       </address>
     </author>
 
-    <date year="2022" month="June" day="28"/>
+    <date year="2022" month="June" day="29"/>
 
     
     <workgroup>CCAMP Working Group</workgroup>
@@ -82,14 +82,14 @@
 <t>To improve the performance and flexibility of aggregated networks, Optical Transport Network (OTN)
    technology is introduced to complement the IP/Ethernet-based aggregation networks to enable full-fiber
    connections.  This scenario is described in the Fifth Generation Fixed Network Architecture
-   by the ETSI F5G ISG [].  OTN can be used to provide high quality carrier services in addition to
+   by the ETSI F5G ISG <xref target="ETSI.GR.F5G.001"/>.  OTN can be used to provide high quality carrier services in addition to
    the traditional MPLS VPN services.  OTN provides Time Division Multiplexing (TDM) based connections
    with no queueing or scheduling needed, with an access bandwidth granularity of 1.25Gbps, i.e.,
    ODU0 (Optical Data Unit 0) and above.  This bandwidth granularity is typically more than what a
    single application would demand, therefore, user traffic usually needs to be aggregated before
    being carried forward through the network.  However, advanced OTN technologies developed in ITU-T
    work items have aimed to enhance OTN to support services of smaller granularity with
-   the introduction of the Optical Service Unit (OSU).  These enhancements make OTN an even more
+   the introduction of the Optical Service Unit (OSU) <xref target="ITU-T.SG15.Q11/15.WI.G.osu"/>.  These enhancements make OTN an even more
    suitable solution for bearing cloud traffic with high quality and bandwidth granularity close to
    what an IP/Ethernet-based network could offer.</t>
 
@@ -200,8 +200,9 @@
    extensions defined for describing such client traffic information.  Extensions to PCEP could
    be defined outside this document to support the use case.  It is also possible to use the BGP
    Link State (BGP-LS) protocol <xref target="RFC7752"/> to perform the distribution of client information.
-   However, an OTN PE node does not typically run BGP protocols due to its heavy weight and
-   complexity. Therefore, PCEP seems to be a better protocol choice in this case.</t>
+   However, an OTN PE node does not typically run BGP protocols due to that BGP lacks protocol
+   extensions to support optical networks. Therefore, PCEP seems to be a better protocol choice
+   in this case.</t>
 
 </section>
 </section>
@@ -212,7 +213,13 @@
 </section>
 <section anchor="security-considerations" title="Security Considerations">
 
-<t>TBD</t>
+<t>This document analyzes the requirements and gaps in connecting to cloud DCs over optical networks
+   without defining new protocols or interfaces. Therefore, this document introduces no new security
+   considerations to the control or management plane of OTN. Risks presented by existing OTN control
+   plane are described in <xref target="RFC4203"/> and <xref target="RFC4328"/>, and risks presented by existing northbound and
+   southbound control interfaces in general are described in <xref target="RFC8453"/>. Moreover, the data communication
+   network (DCN) for OTN control plane protocols are encapsulated in fibers, which providers a much
+   better security environment for running the protocols.</t>
 
 </section>
 <section anchor="iana-considerations" title="IANA Considerations">
@@ -228,6 +235,26 @@
 
     <references title='Normative References'>
 
+<reference anchor="ETSI.GR.F5G.001" target="https://www.etsi.org/deliver/etsi_gr/F5G/001_099/001/01.01.01_60/gr_F5G001v010101p.pdf">
+  <front>
+    <title>Fifth Generation Fixed Network (F5G);F5G Generation Definition Release 1</title>
+    <author >
+      <organization>European Telecommunications Standards Institute (ETSI)</organization>
+    </author>
+    <date year="2020" month="December"/>
+  </front>
+  <seriesInfo name="ETSI GR F5G 001" value=""/>
+</reference>
+<reference anchor="ITU-T.SG15.Q11/15.WI.G.osu" target="https://www.etsi.org/deliver/etsi_gr/F5G/001_099/001/01.01.01_60/gr_F5G001v010101p.pdf">
+  <front>
+    <title>Optical Service Unit (OSU) Path Layer Network</title>
+    <author >
+      <organization>ITU-T SG15</organization>
+    </author>
+    <date year="2020" month="December"/>
+  </front>
+  <seriesInfo name="ITU-T SG15 Q11/15 WI G.osu" value=""/>
+</reference>
 
 
 
@@ -288,6 +315,47 @@
 </front>
 <seriesInfo name='RFC' value='7752'/>
 <seriesInfo name='DOI' value='10.17487/RFC7752'/>
+</reference>
+
+
+
+<reference anchor='RFC4203' target='https://www.rfc-editor.org/info/rfc4203'>
+<front>
+<title>OSPF Extensions in Support of Generalized Multi-Protocol Label Switching (GMPLS)</title>
+<author fullname='K. Kompella' initials='K.' role='editor' surname='Kompella'><organization/></author>
+<author fullname='Y. Rekhter' initials='Y.' role='editor' surname='Rekhter'><organization/></author>
+<date month='October' year='2005'/>
+<abstract><t>This document specifies encoding of extensions to the OSPF routing protocol in support of Generalized Multi-Protocol Label Switching (GMPLS).  [STANDARDS-TRACK]</t></abstract>
+</front>
+<seriesInfo name='RFC' value='4203'/>
+<seriesInfo name='DOI' value='10.17487/RFC4203'/>
+</reference>
+
+
+
+<reference anchor='RFC4328' target='https://www.rfc-editor.org/info/rfc4328'>
+<front>
+<title>Generalized Multi-Protocol Label Switching (GMPLS) Signaling Extensions for G.709 Optical Transport Networks Control</title>
+<author fullname='D. Papadimitriou' initials='D.' role='editor' surname='Papadimitriou'><organization/></author>
+<date month='January' year='2006'/>
+<abstract><t>This document is a companion to the Generalized Multi-Protocol Label Switching (GMPLS) signaling documents.  It describes the technology-specific information needed to extend GMPLS signaling to control Optical Transport Networks (OTN); it also includes the so-called pre-OTN developments.  [STANDARDS-TRACK]</t></abstract>
+</front>
+<seriesInfo name='RFC' value='4328'/>
+<seriesInfo name='DOI' value='10.17487/RFC4328'/>
+</reference>
+
+
+
+<reference anchor='RFC8453' target='https://www.rfc-editor.org/info/rfc8453'>
+<front>
+<title>Framework for Abstraction and Control of TE Networks (ACTN)</title>
+<author fullname='D. Ceccarelli' initials='D.' role='editor' surname='Ceccarelli'><organization/></author>
+<author fullname='Y. Lee' initials='Y.' role='editor' surname='Lee'><organization/></author>
+<date month='August' year='2018'/>
+<abstract><t>Traffic Engineered (TE) networks have a variety of mechanisms to facilitate the separation of the data plane and control plane.  They also have a range of management and provisioning protocols to configure and activate network resources.  These mechanisms represent key technologies for enabling flexible and dynamic networking.  The term &quot;Traffic Engineered network&quot; refers to a network that uses any connection-oriented technology under the control of a distributed or centralized control plane to support dynamic provisioning of end-to- end connectivity.</t><t>Abstraction of network resources is a technique that can be applied to a single network domain or across multiple domains to create a single virtualized network that is under the control of a network operator or the customer of the operator that actually owns the network resources.</t><t>This document provides a framework for Abstraction and Control of TE Networks (ACTN) to support virtual network services and connectivity services.</t></abstract>
+</front>
+<seriesInfo name='RFC' value='8453'/>
+<seriesInfo name='DOI' value='10.17487/RFC8453'/>
 </reference>
 
 
@@ -382,104 +450,115 @@
   </back>
 
 <!-- ##markdown-source:
-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
+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
+rNpmPn61o3Ya2xTmWE1rNyvMSt00ujErUzZKl7m60JU6KXWxtl7NXa1OXVma
+rMEBqnHqtHBtrs5OvbqzWr2tGpvpQl2b5t7VnzzO1rNZbe6Ow8K44AtSO7nL
+Sr0CF3mt5824sO04y/SqGjvZcpTRAeNKNo593Dg+ONohWovatRXInJ5cTdVP
+eEAMXtDDnQxLF65eHyvf5Du2qo9VU7e+OTo4+B671Q4OK/OPunAl6K+N36ns
+sfrfxmUj5V3d1Gbu8Wm9kg+ZWxFh/390u7ZZuvp4R6kx/lNKrnCzNCD+xrb8
+zNUQ9enSllpduZktDD81K22LY4V7elp9X/yQ0ZIVr5iAxsaZP2q3srpUf6fV
+3bk/tvreWHVrsmXpCrew4L53/G+0eilbf1jy2i1nn1h8pS5a1537um3a2nzt
+aE2bFq2bWNPMf1jQwy1H/01DEn8HB/9aFL9h1RrL17+sv5DFTunqlW7snSFZ
+n9/eXE4u3k1ev7yYHBwcHvMpwYhf23mzVBemNDXWuxIPfjV5tEi1iz17f8L/
++kvOzNyWlj++M4XR3qhDPrNTb+L+vK1dZaCIW6wkU2hLmCft9WTNZa7r3KvL
+0oOftjFql5jd4xNy2OExiGVmNTO1Ojo4OuDn3tSQrS3n7pivpi7eKeIQV5Ob
+6XphmmO1bJrKH+/v39/fT0zj7QQM7eemgFTqfXrwcVHvY+M+Nn48+P57+r1/
+cDjhfz9+d7C/qD/iazy9Ozikf6pJlc93QOPy9v34dnJzcfhy8tfDw338+gkC
+njjfDmQbvffG1Hc2M+o9hKZ2396831NTDam/0WvcK4j6KQEyLUW0frdQui1K
+2FM/QUjE3n9EPuPxWOmZb2qdNSQtdaXLtdJVVUTNj5Qts6IlVFUBrxTbUQ4H
+Lw0wg9HvwztGVFhN1TKA8uORmsEU5xDlvHYr1SyNKjsR+syUurZO3S9Nbfhb
+iEwDwfR8bjPCYDmcn2JxY2qvdoHIewqInekacsyVKfNx48b4pRzEAT4So4HY
+hKjdLrEHUNwy/OfGZ7WdGc9kA/QqPwgPtflHa2v+W+JDNogPWYoPTDbQJFKB
+LGRHx1S18XyEVgsEHE0Bx4eIY361XsTlyqZ2haoKXTI/gGhXyCLfVhWwmsnS
+JbaIEDdkXa5sngN6dp7BTXFe3makRNasRKm+apWG1Gfk6XT0yuGvylVtoWvm
++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
+TfQ60BCv+aoARI749KimIdd5jOckvT4m0kOD2+/0IYLkTxt67Wmot7Wn7f7z
+3rV+7vTKPrTzcKyePeVq0vT+8zd9gA0JfIQjOD108c1nQdyTlCkNyk9qwvb6
+dhJi+DSamLnSxFhwGndPgfiUq9Gh5wgAFce6XUhuT3KzWEd8CfEBeIEhXRuR
+VoU6RksVpptGU2FP7OSWU44y1glU7t7rNaFzQFuCWPn4POV2UbHXvbpj980R
+NSVo9XN8iC0ywUdK4gq97hWq1N2oUv05KGdTG3Qgdmpc0m7qmwngypmjeAIw
+eymlVWi04Dkn9rqKEYz6TbUhzrt7IwGTwrmXYvcb+pUDllPznD+o3enRdI9D
+X/pCZB2/vZpKrtk93VxzJYv6Kf3w8jmNLACiQ4l2xYYY3GXZjQM41ZAA1T+W
+VAB+KRIj70KhJIEwtg2ID+aVOeqS9EEfmvZvnhsKFuOpmrd+yR0SyeG4/vOu
+rUMLMTfUvBdfqLStQyQ0HLZjE9TbBbIalvagq090qSMjjcKQPrJiQ5E4lCFH
+cykIU07C2UEuyYEk50m8lW6WLPqVMU0/s5GRBI20eoUbBXzEaGiwS6z/693r
+0xcvvjtEDpzTEDGMSr4YiiRB0RVZ1tzE29ZdRrZluIkbUpw8sLn75mbKRbtQ
+/e75q1dMNY5ozK+ofXw0JuLiDZ2kzmJqRwqYBumKv55N92KlC903Lbvjhk0Q
+VcIT5je6u1Q9SCJL8Jypui1Mv62bOqXUlIkZrZemFudOhI/sjOS1I6BWaJOF
+MROz2L9QwC2goo8Ww6oNBdYTIu4uwVbS9Ktnsh0onM1U7J27lAD9FWRRONEx
+8uvQERvre1Ash+n12FFi2JjNPHtdotzISGridCEzJXYZaJe6XEintzf1ALM9
+Y6M+XkhAd//qbvYGJtXvLNpUQfKdYlbpt2KB9B9MnA30vDZAJsSYL0ASoUaV
+LjehGZCRWzTJXAv7iRr1BEyp8pTyZU7d8/EK+qUuRhkMsdLrwmnquEljp9Yr
+ElUT2pGLmqIZ8gKiGGs8aiH6iOyb7RlkylTWUdEqPSVxd6BS6RoKF261cnlA
+iqiP0JcO3XRp+pYFa1R1cAF8WAFKywYGSgFmnDpH1PwGpwSLsDDI3VM3gYjD
+d0MJ0XD3qgtq7AlJx8ngBIV1nteSTlAJ4H0rgEl4RP3TGBe5zZ0ap9xI0HUd
+J3PZdkOEYTTDXjZtxkee6/ELLyKJdag/g0T4OvBV2Jz0kzqro5dhJI14IhoE
+OUsh19pCBsSe3pNICEw0gVYc5eZGe2qNCsAFTCHbCT26YHVdK9Z9QTkEfAaV
+IQfBZKKdQ2qwCDu3Ektg9tQD0rmumgiXUQTBPQPGX5v7yIFgQEwnuMVDf8tg
+RBrZLlxx2EPgMNg1BJqkerE8yhCX1LMH2Rj1SBxb4nsJbpa6zpkR1gXJXtob
+Ztg/Z1/X2Sf45tJocm1cvoA97MYWoIzb4rf9OI2n0ThDw7ZvK0EcHENu3wKb
++OAR8llJDvuBPcxHePT04d3rPQWQKRvSAzUauUMpSWbcXGhHWIb76f7geffD
+m5Prwe69OBfvzRKT3wQwSVbvEUlM/xIseRFURBymE8NhT13Uw3qiYzNo1+DE
+95UrU7MptpuGU42hLrhJPWu0rA4GTy+9ACKlv9zpKnn7QFV0Apx1w1P7Mkgo
+EGdVfCYTWekwZkznB7slKXdwGbJzlm5uMitBmVrDyRWH8+bozHIh6eB35GT+
+IQk2bBqpCcmYkLuwKytlklxhu00SukVbTO87BKMcJYH0KUYpJigepVbxzAER
+Q5jjDFASQGn3hntskcxKc78Wzndzdh2/pKkb7EdvuL9F3qgzcxxnzsSXIRT3
+ZjhBSSn7k3l1UEhQrY+hr8fAKD7rMV2E+TJtoDdsqNFfk5Px21lxVjDE1g2F
+/kneP9I+XILf5NAMonQPUC2KL7iLmXuO4GbsSgY+nYl31tebGfGUqy/wzZd9
+aHrkPAWOdSrEPepm6bjRLIPo1GZOYUdUeNmE2b+tdRjFpfdcuoO5VE0oTrcS
+ZXCjz9OwTmQLDKIAIxbqkcpMuPbHV5ZSDsmxQg4bBiPT0/OhmlMijlTr9Hy6
+F5L6ly9eHHz+LC7Bg2phoK1rSUhKqXC6xFiKDmE7lAIEJF5e8BkkbT2Rg+Hz
+QbVAPIhbyoQ7nQvg81JJ99vuvcEzvyrkDYsrSZrDcVCSJB0BfP9yMSUCb2z5
+SV79Vbt4NH6DGJJEJpL44x9fHqG8obcm5JUUwYN+LdNlCP2r0fnd2J0bNAkJ
+c2cEZ7qZS92WxFXPDPLWCCDCQOibAjHUp+835N+TxMbrdLC72+5VAxawNzTP
+D+lYTEHSvbOlC0GVPYzf3YNMeQ5wxe8IxSbGaeg86/DqBhfUfznjlTdxILh1
+0UCLPCj5bVvFmmYitoP4r73ONxg/U5pH8ZJNSF4cuR+6LzsqANYMZTS0sRTY
+SWN8Rpx1xlq8u11qqwXIoGSve6tKAERqj4l6Zz2rkwdWMqNI7xcGBKQz2Isl
+eePJSe+1oVD1Hx08l1lZfPD86BX5LgeSrxApYSxLjjpx0IaiID6JN+hEJMMa
+ej2peIqVVy9ePqc3Ma4gRpfqaBn490FnkE+dnV7v9WF/K9ZyLCqR8KLqicMJ
+ftUqzXFj3UhhZdXKKwHBstNs2pRI7lzJyuDxalum5CjRmvD7mCfXJ7/DcoOx
+smXwFh3e+AoveM7gsvj4cKzKlt4qNvmfv5kDlAy3ap+pk4zerCtQ6obRYedB
+W/fs/BOrF1VaNTEAAA==
 
 -->
 
