@@ -5,12 +5,12 @@
 CCAMP Working Group                                               S. Liu
 Internet-Draft                                              China Mobile
 Intended status: Standards Track                                H. Zheng
-Expires: 31 December 2022                            Huawei Technologies
+Expires: 12 January 2023                             Huawei Technologies
                                                                   A. Guo
                                                   Futurewei Technologies
                                                                  Y. Zhao
                                                             China Mobile
-                                                            29 June 2022
+                                                            11 July 2022
 
 
    Problem Statement and Gap Analyis for Connecting to Cloud DCs via
@@ -42,7 +42,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 December 2022.
+   This Internet-Draft will expire on 12 January 2023.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Liu, et al.             Expires 31 December 2022                [Page 1]
+Liu, et al.              Expires 12 January 2023                [Page 1]
 
-Internet-Draft       Cloud Optical Problem Statement           June 2022
+Internet-Draft       Cloud Optical Problem Statement           July 2022
 
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -72,15 +72,19 @@ Table of Contents
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
    2.  Requirements and Gap Analysis . . . . . . . . . . . . . . . .   3
      2.1.  Multi-cloud Access  . . . . . . . . . . . . . . . . . . .   4
-     2.2.  Service-awareness . . . . . . . . . . . . . . . . . . . .   5
-   3.  Manageability Considerations  . . . . . . . . . . . . . . . .   6
-   4.  Security Considerations . . . . . . . . . . . . . . . . . . .   6
-   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
-   6.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   6
-     6.1.  Normative References  . . . . . . . . . . . . . . . . . .   6
-     6.2.  Informative References  . . . . . . . . . . . . . . . . .   7
-   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .   8
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   8
+     2.2.  Service Awareness . . . . . . . . . . . . . . . . . . . .   5
+   3.  Framework . . . . . . . . . . . . . . . . . . . . . . . . . .   6
+     3.1.  Service Identification and Mapping  . . . . . . . . . . .   6
+     3.2.  Reporting Service Identification  . . . . . . . . . . . .   7
+     3.3.  Configuring Service Mapping . . . . . . . . . . . . . . .   7
+   4.  Manageability Considerations  . . . . . . . . . . . . . . . .   8
+   5.  Security Considerations . . . . . . . . . . . . . . . . . . .   8
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   8
+   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   8
+     7.1.  Normative References  . . . . . . . . . . . . . . . . . .   8
+     7.2.  Informative References  . . . . . . . . . . . . . . . . .   9
+   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .   9
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   9
 
 1.  Introduction
 
@@ -102,29 +106,28 @@ Table of Contents
    Optical Transport Network (OTN) technology is introduced to
    complement the IP/Ethernet-based aggregation networks to enable full-
    fiber connections.  This scenario is described in the Fifth
+
+
+
+Liu, et al.              Expires 12 January 2023                [Page 2]
+
+Internet-Draft       Cloud Optical Problem Statement           July 2022
+
+
    Generation Fixed Network Architecture by the ETSI F5G ISG
    [ETSI.GR.F5G.001].  OTN can be used to provide high quality carrier
    services in addition to the traditional MPLS VPN services.  OTN
    provides Time Division Multiplexing (TDM) based connections with no
-
-
-
-Liu, et al.             Expires 31 December 2022                [Page 2]
-
-Internet-Draft       Cloud Optical Problem Statement           June 2022
-
-
    queueing or scheduling needed, with an access bandwidth granularity
    of 1.25Gbps, i.e., ODU0 (Optical Data Unit 0) and above.  This
    bandwidth granularity is typically more than what a single
    application would demand, therefore, user traffic usually needs to be
    aggregated before being carried forward through the network.
    However, advanced OTN technologies developed in ITU-T work items have
-   aimed to enhance OTN to support services of smaller granularity with
-   the introduction of the Optical Service Unit (OSU)
-   [ITU-T.SG15.Q11_15.WI.G.osu].  These enhancements make OTN an even
-   more suitable solution for bearing cloud traffic with high quality
-   and bandwidth granularity close to what an IP/Ethernet-based network
+   aimed to enhance OTN to support services of much finer granularity.
+   These enhancements, when implemented, will make OTN an even more
+   suitable solution for bearing cloud traffic with high quality and
+   bandwidth granularity close to what an IP/Ethernet-based network
    could offer.
 
    Many cloud-based services that require high bandwdith, deterministic
@@ -162,12 +165,9 @@ Internet-Draft       Cloud Optical Problem Statement           June 2022
 
 
 
-
-
-
-Liu, et al.             Expires 31 December 2022                [Page 3]
+Liu, et al.              Expires 12 January 2023                [Page 3]
 
-Internet-Draft       Cloud Optical Problem Statement           June 2022
+Internet-Draft       Cloud Optical Problem Statement           July 2022
 
 
 2.1.  Multi-cloud Access
@@ -221,9 +221,9 @@ Internet-Draft       Cloud Optical Problem Statement           June 2022
 
 
 
-Liu, et al.             Expires 31 December 2022                [Page 4]
+Liu, et al.              Expires 12 January 2023                [Page 4]
 
-Internet-Draft       Cloud Optical Problem Statement           June 2022
+Internet-Draft       Cloud Optical Problem Statement           July 2022
 
 
    [RFC4461] defines the requirements for establishing P2MP MPLS traffic
@@ -234,7 +234,7 @@ Internet-Draft       Cloud Optical Problem Statement           June 2022
    extensions are missing and are required for establishing P2MP and
    MP2MP connetctions with OTN resources, i.e., time slots.
 
-2.2.  Service-awareness
+2.2.  Service Awareness
 
    Cloud-oriented services are dynamic in nature with frequent changes
    in bandwidth and quality of service (QoS) requirements.  However, in
@@ -255,51 +255,150 @@ Internet-Draft       Cloud Optical Problem Statement           June 2022
    New service-aware capabilties are needed for both the control plane
    and data plane to address this challenge for OTNs.  In the data
    plane, new hardware that can examine cloud traffic packet header
-   fields (such as the IP header destination IP address and/or the type
-   of service (TOS) field, virtual routing and forwarding (VRF)
-   identifiers, or layer 2 virtual laocal area network (VLAN)
-   identifiers) are introduced to make the PE node able to sense the
-   type of traffic.  This work for the data plane is out of the scope of
-   this document.
+   fields (such as the IP header source and destination IP address and/
+   or the type of service (TOS) field, virtual routing and forwarding
+   (VRF) identifiers, layer 2 Media Access Control (MAC) address or
+   virtual local area network (VLAN) identifiers) are introduced to make
+   the PE node able to sense the type of traffic.  This work for the
+   data plane is out of the scope of this document.
 
-   Upon examinining the cloud traffic header fields and obtaining client
-   inforamtion such as the cloud destination and QoS requirements, the
-   PE node needs to forward such information to the control entity of
-   the OTN to make decisions on connection configurations.  The client
-   information could include, but is not limited to, the destination IP
-   addresses, type of cloud service, and QoS information such as
-   bandwidth, latency bounds, and resiliency factors.  The control
-   entity may be an SDN controller or a control plane instace: in the
-   former case communications are established between each of the PE
-   nodes and the controller, and the controller serves as a central
-   authority for OTN connection configurations; whereas in the latter
-   case, all of the PE nodes need to disseimate client information to
+   Being service aware allows the OTN network to accurately identify the
+   characteristics of carried client service flows and the real-time
+   traffic of each flow, making it possible to achieve automated and
+   real-time operations such as dynamic connection establishment and
+   dynamic bandwidth adjustment according to preset policies.  Those
+   capabilities help to optimize the resource utilization and
+   significantly reduce the operational cost of the network.
+
+   Upon examining the client traffic header fields and obtaining client
+   information such as the cloud destination and QoS requirements, the
+   OTN PE node needs to forward such information to the control entity
+   of the OTN to make decisions on connection configurations, and map
 
 
 
-Liu, et al.             Expires 31 December 2022                [Page 5]
+Liu, et al.              Expires 12 January 2023                [Page 5]
 
-Internet-Draft       Cloud Optical Problem Statement           June 2022
+Internet-Draft       Cloud Optical Problem Statement           July 2022
 
 
-   each other using control plane protocols or possibly through some
-   intermediate reflectors.  It is desirable that the protocols used for
-   both cases are consistent, and ideally, the same.  A candidate
-   protocol is the PCE communication Protocol (PCEP) [RFC5440], but
-   there are currently no extensions defined for describing such client
-   traffic information.  Extensions to PCEP could be defined outside
-   this document to support the use case.  It is also possible to use
-   the BGP Link State (BGP-LS) protocol [RFC7752] to perform the
-   distribution of client information.  However, an OTN PE node does not
-   typically run BGP protocols due to that BGP lacks protocol extensions
-   to support optical networks.  Therefore, PCEP seems to be a better
-   protocol choice in this case.
+   the client packets of different destination/QoS to different ODU
+   connections The client information could include, but is not limited
+   to, the destination IP addresses, type of cloud service, and QoS
+   information such as bandwidth, latency bounds, and resiliency
+   factors.  The control entity may be an SDN controller or a control
+   plane instace: in the former case communications are established
+   between each of the PE nodes and the controller, and the controller
+   serves as a central authority for OTN connection configurations;
+   whereas in the latter case, all of the PE nodes need to disseimate
+   client information to each other using control plane protocols or
+   possibly through some intermediate reflectors.  It is desirable that
+   the protocols used for both cases are consistent, and ideally, the
+   same.  A candidate protocol is the PCE communication Protocol (PCEP)
+   [RFC5440], but there are currently no extensions defined for
+   describing such client traffic information.  Extensions to PCEP could
+   be defined outside this document to support the use case.  It is also
+   possible to use the BGP Link State (BGP-LS) protocol [RFC7752] to
+   perform the distribution of client information.  However, an OTN PE
+   node does not typically run BGP protocols due to that BGP lacks
+   protocol extensions to support optical networks.  Therefore, PCEP
+   seems to be a better protocol choice in this case.
 
-3.  Manageability Considerations
+3.  Framework
+
+3.1.  Service Identification and Mapping
+
+   The OTN PE node should support the learning and identification of the
+   packet header carried by client services.  The identification content
+   may include but not limited to the following content:
+
+   *  Source and destination MAC addresses
+
+   *  Source and destination IP addresses
+
+   *  VRF identifier
+
+   *  VLAN (S-VLAN and/or C-VLAN) identifier
+
+   *  MPLS label
+
+   The OTN PE node should support reporting the above identified client
+   services to the management and control system, which can obtain the
+   client-side addresses reported by each node in the entire network to
+   build up a global topology.  Some of the learnt content, such as the
+   VLAN identifier, are not required to be reported since VLAN is of
+   only local significance.
+
+
+
+
+
+Liu, et al.              Expires 12 January 2023                [Page 6]
+
+Internet-Draft       Cloud Optical Problem Statement           July 2022
+
+
+   The management and control system should be able to calculate the
+   corresponding ODU connection route based on the source and
+   destination addresses of the service, and create the mapping between
+   service address and the ODU cnnection according to preset policies.
+   The mapping table can be generated through management plane
+   configuration or control plane protocol.
+
+3.2.  Reporting Service Identification
+
+   The control plane protocol extension should report to the controller
+   service identification contents, which should include at least the
+   following content:
+
+   *  A private network or network slice identifier, which is a globally
+      unique identifier to identify different tenants or applications
+      supported by the private network
+
+   *  OTN node identifier, which identify the OTN PE node that reported
+      this packet
+
+   *  The IP/MAC address of the client side learned by the OTN PE node
+
+   When the PCEP protocol is used, this extension may be defined as a
+   PCEP Report message.
+
+3.3.  Configuring Service Mapping
+
+   The control plane protocol extension may be defined to push the
+   mapping table between service address to ODU connections from the
+   controller to the OTN PE nodes.  The message should include at least
+   the following content:
+
+   *  A private network or network slice identifier, which is a globally
+      unique identifier to identify different tenants or applications
+      supported by the private network
+
+   *  A mapping table of {service address, ODU connection identifier},
+      with each entry of the table contains at least the information of
+      {remote OTN node, remote service address}, where the concept of
+      "remote" is based on the perspective of the OTN device that
+      receives this packet
+
+   When the PCEP protocol is used, this extension may be defined as a
+   PCEP Update message.
+
+
+
+
+
+
+
+Liu, et al.              Expires 12 January 2023                [Page 7]
+
+Internet-Draft       Cloud Optical Problem Statement           July 2022
+
+
+4.  Manageability Considerations
 
    TBD
 
-4.  Security Considerations
+5.  Security Considerations
 
    This document analyzes the requirements and gaps in connecting to
    cloud DCs over optical networks without defining new protocols or
@@ -312,35 +411,18 @@ Internet-Draft       Cloud Optical Problem Statement           June 2022
    protocols are encapsulated in fibers, which providers a much better
    security environment for running the protocols.
 
-5.  IANA Considerations
+6.  IANA Considerations
 
    This document requires no IANA actions.
 
-6.  References
+7.  References
 
-6.1.  Normative References
+7.1.  Normative References
 
    [ETSI.GR.F5G.001]
               European Telecommunications Standards Institute (ETSI),
               "Fifth Generation Fixed Network (F5G);F5G Generation
               Definition Release 1", ETSI GR F5G 001 , December 2020,
-              <https://www.etsi.org/deliver/etsi_gr/
-              F5G/001_099/001/01.01.01_60/gr_F5G001v010101p.pdf>.
-
-
-
-
-
-
-
-Liu, et al.             Expires 31 December 2022                [Page 6]
-
-Internet-Draft       Cloud Optical Problem Statement           June 2022
-
-
-   [ITU-T.SG15.Q11_15.WI.G.osu]
-              ITU-T SG15, "Optical Service Unit (OSU) Path Layer
-              Network", ITU-T SG15 Q11/15 WI G.osu , December 2020,
               <https://www.etsi.org/deliver/etsi_gr/
               F5G/001_099/001/01.01.01_60/gr_F5G001v010101p.pdf>.
 
@@ -359,6 +441,14 @@ Internet-Draft       Cloud Optical Problem Statement           June 2022
               Multipoint Traffic-Engineered MPLS Label Switched Paths
               (LSPs)", RFC 4461, DOI 10.17487/RFC4461, April 2006,
               <https://www.rfc-editor.org/info/rfc4461>.
+
+
+
+
+Liu, et al.              Expires 12 January 2023                [Page 8]
+
+Internet-Draft       Cloud Optical Problem Statement           July 2022
+
 
    [RFC5440]  Vasseur, JP., Ed. and JL. Le Roux, Ed., "Path Computation
               Element (PCE) Communication Protocol (PCEP)", RFC 5440,
@@ -382,17 +472,7 @@ Internet-Draft       Cloud Optical Problem Statement           June 2022
               DOI 10.17487/RFC8453, August 2018,
               <https://www.rfc-editor.org/info/rfc8453>.
 
-6.2.  Informative References
-
-
-
-
-
-
-Liu, et al.             Expires 31 December 2022                [Page 7]
-
-Internet-Draft       Cloud Optical Problem Statement           June 2022
-
+7.2.  Informative References
 
    [I-D.ietf-rtgwg-net2cloud-gap-analysis]
               Dunbar, L., Malis, A. G., and C. Jacquenet, "Networks
@@ -403,18 +483,28 @@ Internet-Draft       Cloud Optical Problem Statement           June 2022
               net2cloud-gap-analysis-09.txt>.
 
    [I-D.ietf-rtgwg-net2cloud-problem-statement]
-              Dunbar, L., Consulting, M., Jacquenet, C., and M. Toy,
-              "Dynamic Networks to Hybrid Cloud DCs Problem Statement",
-              Work in Progress, Internet-Draft, draft-ietf-rtgwg-
-              net2cloud-problem-statement-13, 15 June 2022,
+              Dunbar, L., Consulting, M., Jacquenet, C., Toy, M., and K.
+              Majumdar, "Dynamic Networks to Hybrid Cloud DCs Problem
+              Statement", Work in Progress, Internet-Draft, draft-ietf-
+              rtgwg-net2cloud-problem-statement-14, 29 June 2022,
               <https://www.ietf.org/archive/id/draft-ietf-rtgwg-
-              net2cloud-problem-statement-13.txt>.
+              net2cloud-problem-statement-14.txt>.
 
 Acknowledgments
 
    TBD
 
 Authors' Addresses
+
+
+
+
+
+
+Liu, et al.              Expires 12 January 2023                [Page 9]
+
+Internet-Draft       Cloud Optical Problem Statement           July 2022
+
 
    Sheng Liu
    China Mobile
@@ -445,4 +535,26 @@ Authors' Addresses
 
 
 
-Liu, et al.             Expires 31 December 2022                [Page 8]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Liu, et al.              Expires 12 January 2023               [Page 10]

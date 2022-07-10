@@ -40,7 +40,7 @@
       </address>
     </author>
 
-    <date year="2022" month="June" day="29"/>
+    <date year="2022" month="July" day="11"/>
 
     
     <workgroup>CCAMP Working Group</workgroup>
@@ -88,10 +88,9 @@
    ODU0 (Optical Data Unit 0) and above.  This bandwidth granularity is typically more than what a
    single application would demand, therefore, user traffic usually needs to be aggregated before
    being carried forward through the network.  However, advanced OTN technologies developed in ITU-T
-   work items have aimed to enhance OTN to support services of smaller granularity with
-   the introduction of the Optical Service Unit (OSU) <xref target="ITU-T.SG15.Q11/15.WI.G.osu"/>.  These enhancements make OTN an even more
-   suitable solution for bearing cloud traffic with high quality and bandwidth granularity close to
-   what an IP/Ethernet-based network could offer.</t>
+   work items have aimed to enhance OTN to support services of much finer granularity.  These enhancements,
+   when implemented, will make OTN an even more suitable solution for bearing cloud traffic with high quality
+   and bandwidth granularity close to what an IP/Ethernet-based network could offer.</t>
 
 <t>Many cloud-based services that require high bandwdith, deterministic service quality, and flexible
    access could potentially benefit from the network scenario of using OTN-based aggregation networks
@@ -164,7 +163,7 @@
    i.e., time slots.</t>
 
 </section>
-<section anchor="service-awareness" title="Service-awareness">
+<section anchor="service-awareness" title="Service Awareness">
 
 <t>Cloud-oriented services are dynamic in nature with frequent changes in bandwidth and quality
    of service (QoS) requirements.  However, in typical OTN scenarios, OTN connections are
@@ -180,15 +179,22 @@
 
 <t>New service-aware capabilties are needed for both the control plane and data plane to address
    this challenge for OTNs.  In the data plane, new hardware that can examine cloud traffic
-   packet header fields (such as the IP header destination IP address and/or the type of service
-   (TOS) field, virtual routing and forwarding (VRF) identifiers, or layer 2 virtual laocal area
-   network (VLAN) identifiers) are introduced to make the PE node able to sense the type of
-   traffic.  This work for the data plane is out of the scope of this document.</t>
+   packet header fields (such as the IP header source and destination IP address and/or the type of service
+   (TOS) field, virtual routing and forwarding (VRF) identifiers, layer 2 Media Access Control (MAC)
+   address or virtual local area network (VLAN) identifiers) are introduced to make the PE node
+   able to sense the type of traffic.  This work for the data plane is out of the scope of this document.</t>
 
-<t>Upon examinining the cloud traffic header fields and obtaining client inforamtion such as the
-   cloud destination and QoS requirements, the PE node needs to forward such information to the
-   control entity of the OTN to make decisions on connection configurations.  The client
-   information could include, but is not limited to, the destination IP addresses, type of cloud
+<t>Being service aware allows the OTN network to accurately identify the characteristics of carried
+   client service flows and the real-time traffic of each flow, making it possible to achieve automated and 
+   real-time operations such as dynamic connection establishment and dynamic bandwidth adjustment according 
+   to preset policies. Those capabilities help to optimize the resource utilization and significantly
+   reduce the operational cost of the network.</t>
+
+<t>Upon examining the client traffic header fields and obtaining client information such as the
+   cloud destination and QoS requirements, the OTN PE node needs to forward such information to the
+   control entity of the OTN to make decisions on connection configurations, and map the client packets
+   of different destination/QoS to different ODU connections The client information could include, 
+   but is not limited to, the destination IP addresses, type of cloud
    service, and QoS information such as bandwidth, latency bounds, and resiliency factors.  The
    control entity may be an SDN controller or a control plane instace: in the former case
    communications are established between each of the PE nodes and the controller, and the
@@ -203,6 +209,66 @@
    However, an OTN PE node does not typically run BGP protocols due to that BGP lacks protocol
    extensions to support optical networks. Therefore, PCEP seems to be a better protocol choice
    in this case.</t>
+
+</section>
+</section>
+<section anchor="framework" title="Framework">
+
+<section anchor="service-identification-and-mapping" title="Service Identification and Mapping">
+
+<t>The OTN PE node should support the learning and identification of the packet header carried 
+   by client services. The identification content may include but not limited to the following
+   content:</t>
+
+<t><list style="symbols">
+  <t>Source and destination MAC addresses</t>
+  <t>Source and destination IP addresses</t>
+  <t>VRF identifier</t>
+  <t>VLAN (S-VLAN and/or C-VLAN) identifier</t>
+  <t>MPLS label</t>
+</list></t>
+
+<t>The OTN PE node should support reporting the above identified client services to the management
+   and control system, which can obtain the client-side addresses reported by each node in the entire
+   network to build up a global topology. Some of the learnt content, such as the VLAN identifier,
+   are not required to be reported since VLAN is of only local significance.</t>
+
+<t>The management and control system should be able to calculate the corresponding ODU connection route
+   based on the source and destination addresses of the service, and create the mapping between service
+   address and the ODU cnnection according to preset policies. The mapping table can be generated
+   through management plane configuration or control plane protocol.</t>
+
+</section>
+<section anchor="reporting-service-identification" title="Reporting Service Identification">
+
+<t>The control plane protocol extension should report to the controller service identification contents, which
+   should include at least the following content:</t>
+
+<t><list style="symbols">
+  <t>A private network or network slice identifier, which is a globally unique identifier to identify different
+   tenants or applications supported by the private network</t>
+  <t>OTN node identifier, which identify the OTN PE node that reported this packet</t>
+  <t>The IP/MAC address of the client side learned by the OTN PE node</t>
+</list></t>
+
+<t>When the PCEP protocol is used, this extension may be defined as a PCEP Report message.</t>
+
+</section>
+<section anchor="configuring-service-mapping" title="Configuring Service Mapping">
+
+<t>The control plane protocol extension may be defined to push the mapping table between service address to 
+   ODU connections from the controller to the OTN PE nodes. The message should include at least the following
+   content:</t>
+
+<t><list style="symbols">
+  <t>A private network or network slice identifier, which is a globally unique identifier to identify different
+   tenants or applications supported by the private network</t>
+  <t>A mapping table of {service address, ODU connection identifier}, with each entry of the table contains
+   at least the information of {remote OTN node, remote service address}, where the concept of “remote” is
+   based on the perspective of the OTN device that receives this packet</t>
+</list></t>
+
+<t>When the PCEP protocol is used, this extension may be defined as a PCEP Update message.</t>
 
 </section>
 </section>
@@ -244,16 +310,6 @@
     <date year="2020" month="December"/>
   </front>
   <seriesInfo name="ETSI GR F5G 001" value=""/>
-</reference>
-<reference anchor="ITU-T.SG15.Q11/15.WI.G.osu" target="https://www.etsi.org/deliver/etsi_gr/F5G/001_099/001/01.01.01_60/gr_F5G001v010101p.pdf">
-  <front>
-    <title>Optical Service Unit (OSU) Path Layer Network</title>
-    <author >
-      <organization>ITU-T SG15</organization>
-    </author>
-    <date year="2020" month="December"/>
-  </front>
-  <seriesInfo name="ITU-T SG15 Q11/15 WI G.osu" value=""/>
 </reference>
 
 
@@ -383,7 +439,10 @@
       <author fullname='Mehmet Toy'>
 	 <organization>Verizon</organization>
       </author>
-      <date day='15' month='June' year='2022'/>
+      <author fullname='Kausik Majumdar'>
+	 <organization>Microsoft</organization>
+      </author>
+      <date day='29' month='June' year='2022'/>
       <abstract>
 	 <t>   This document describes the network-related problems enterprises
    face today when interconnecting their branch offices with dynamic
@@ -404,8 +463,8 @@
 	 </t>
       </abstract>
    </front>
-   <seriesInfo name='Internet-Draft' value='draft-ietf-rtgwg-net2cloud-problem-statement-13'/>
-   <format target='https://www.ietf.org/archive/id/draft-ietf-rtgwg-net2cloud-problem-statement-13.txt' type='TXT'/>
+   <seriesInfo name='Internet-Draft' value='draft-ietf-rtgwg-net2cloud-problem-statement-14'/>
+   <format target='https://www.ietf.org/archive/id/draft-ietf-rtgwg-net2cloud-problem-statement-14.txt' type='TXT'/>
 </reference>
 
 
@@ -450,115 +509,133 @@
   </back>
 
 <!-- ##markdown-source:
-H4sIANlGvGIAA71aW3cbx5F+56/otV7IGAAvkhyZOTlrhqRonhUpRKTkk6z3
-6DRmGkBbg+nJ9AxpmNT+9nxV1d0zA4GK8xL6QnDQ3VVdl69uMx6PdzKX23Jx
-rNpmPn61o3Ya2xTmWE1rNyvMSt00ujErUzZKl7m60JU6KXWxtl7NXa1OXVma
-rMEBqnHqtHBtrs5OvbqzWr2tGpvpQl2b5t7VnzzO1rNZbe6Ow8K44AtSO7nL
-Sr0CF3mt5824sO04y/SqGjvZcpTRAeNKNo593Dg+ONohWovatRXInJ5cTdVP
-eEAMXtDDnQxLF65eHyvf5Du2qo9VU7e+OTo4+B671Q4OK/OPunAl6K+N36ns
-sfrfxmUj5V3d1Gbu8Wm9kg+ZWxFh/390u7ZZuvp4R6kx/lNKrnCzNCD+xrb8
-zNUQ9enSllpduZktDD81K22LY4V7elp9X/yQ0ZIVr5iAxsaZP2q3srpUf6fV
-3bk/tvreWHVrsmXpCrew4L53/G+0eilbf1jy2i1nn1h8pS5a1537um3a2nzt
-aE2bFq2bWNPMf1jQwy1H/01DEn8HB/9aFL9h1RrL17+sv5DFTunqlW7snSFZ
-n9/eXE4u3k1ev7yYHBwcHvMpwYhf23mzVBemNDXWuxIPfjV5tEi1iz17f8L/
-+kvOzNyWlj++M4XR3qhDPrNTb+L+vK1dZaCIW6wkU2hLmCft9WTNZa7r3KvL
-0oOftjFql5jd4xNy2OExiGVmNTO1Ojo4OuDn3tSQrS3n7pivpi7eKeIQV5Ob
-6XphmmO1bJrKH+/v39/fT0zj7QQM7eemgFTqfXrwcVHvY+M+Nn48+P57+r1/
-cDjhfz9+d7C/qD/iazy9Ozikf6pJlc93QOPy9v34dnJzcfhy8tfDw338+gkC
-njjfDmQbvffG1Hc2M+o9hKZ2396831NTDam/0WvcK4j6KQEyLUW0frdQui1K
-2FM/QUjE3n9EPuPxWOmZb2qdNSQtdaXLtdJVVUTNj5Qts6IlVFUBrxTbUQ4H
-Lw0wg9HvwztGVFhN1TKA8uORmsEU5xDlvHYr1SyNKjsR+syUurZO3S9Nbfhb
-iEwDwfR8bjPCYDmcn2JxY2qvdoHIewqInekacsyVKfNx48b4pRzEAT4So4HY
-hKjdLrEHUNwy/OfGZ7WdGc9kA/QqPwgPtflHa2v+W+JDNogPWYoPTDbQJFKB
-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
-ss/lt2P6+VbtP0ajV+Ec9XNHeJ/20NJv+8fgIT9jQrz5cb+3bX9nG78/P74d
-n/xh4+Ef3o7PH4WRi58SA5s/idi2Z+EiceeXIosiJSvs/z34Gei1p6HfTb+/
-TfQ60BCv+aoARI749KimIdd5jOckvT4m0kOD2+/0IYLkTxt67Wmot7Wn7f7z
-3rV+7vTKPrTzcKyePeVq0vT+8zd9gA0JfIQjOD108c1nQdyTlCkNyk9qwvb6
-dhJi+DSamLnSxFhwGndPgfiUq9Gh5wgAFce6XUhuT3KzWEd8CfEBeIEhXRuR
-VoU6RksVpptGU2FP7OSWU44y1glU7t7rNaFzQFuCWPn4POV2UbHXvbpj980R
-NSVo9XN8iC0ywUdK4gq97hWq1N2oUv05KGdTG3Qgdmpc0m7qmwngypmjeAIw
-eymlVWi04Dkn9rqKEYz6TbUhzrt7IwGTwrmXYvcb+pUDllPznD+o3enRdI9D
-X/pCZB2/vZpKrtk93VxzJYv6Kf3w8jmNLACiQ4l2xYYY3GXZjQM41ZAA1T+W
-VAB+KRIj70KhJIEwtg2ID+aVOeqS9EEfmvZvnhsKFuOpmrd+yR0SyeG4/vOu
-rUMLMTfUvBdfqLStQyQ0HLZjE9TbBbIalvagq090qSMjjcKQPrJiQ5E4lCFH
-cykIU07C2UEuyYEk50m8lW6WLPqVMU0/s5GRBI20eoUbBXzEaGiwS6z/693r
-0xcvvjtEDpzTEDGMSr4YiiRB0RVZ1tzE29ZdRrZluIkbUpw8sLn75mbKRbtQ
-/e75q1dMNY5ozK+ofXw0JuLiDZ2kzmJqRwqYBumKv55N92KlC903Lbvjhk0Q
-VcIT5je6u1Q9SCJL8Jypui1Mv62bOqXUlIkZrZemFudOhI/sjOS1I6BWaJOF
-MROz2L9QwC2goo8Ww6oNBdYTIu4uwVbS9Ktnsh0onM1U7J27lAD9FWRRONEx
-8uvQERvre1Ash+n12FFi2JjNPHtdotzISGridCEzJXYZaJe6XEintzf1ALM9
-Y6M+XkhAd//qbvYGJtXvLNpUQfKdYlbpt2KB9B9MnA30vDZAJsSYL0ASoUaV
-LjehGZCRWzTJXAv7iRr1BEyp8pTyZU7d8/EK+qUuRhkMsdLrwmnquEljp9Yr
-ElUT2pGLmqIZ8gKiGGs8aiH6iOyb7RlkylTWUdEqPSVxd6BS6RoKF261cnlA
-iqiP0JcO3XRp+pYFa1R1cAF8WAFKywYGSgFmnDpH1PwGpwSLsDDI3VM3gYjD
-d0MJ0XD3qgtq7AlJx8ngBIV1nteSTlAJ4H0rgEl4RP3TGBe5zZ0ap9xI0HUd
-J3PZdkOEYTTDXjZtxkee6/ELLyKJdag/g0T4OvBV2Jz0kzqro5dhJI14IhoE
-OUsh19pCBsSe3pNICEw0gVYc5eZGe2qNCsAFTCHbCT26YHVdK9Z9QTkEfAaV
-IQfBZKKdQ2qwCDu3Ektg9tQD0rmumgiXUQTBPQPGX5v7yIFgQEwnuMVDf8tg
-RBrZLlxx2EPgMNg1BJqkerE8yhCX1LMH2Rj1SBxb4nsJbpa6zpkR1gXJXtob
-Ztg/Z1/X2Sf45tJocm1cvoA97MYWoIzb4rf9OI2n0ThDw7ZvK0EcHENu3wKb
-+OAR8llJDvuBPcxHePT04d3rPQWQKRvSAzUauUMpSWbcXGhHWIb76f7geffD
-m5Prwe69OBfvzRKT3wQwSVbvEUlM/xIseRFURBymE8NhT13Uw3qiYzNo1+DE
-95UrU7MptpuGU42hLrhJPWu0rA4GTy+9ACKlv9zpKnn7QFV0Apx1w1P7Mkgo
-EGdVfCYTWekwZkznB7slKXdwGbJzlm5uMitBmVrDyRWH8+bozHIh6eB35GT+
-IQk2bBqpCcmYkLuwKytlklxhu00SukVbTO87BKMcJYH0KUYpJigepVbxzAER
-Q5jjDFASQGn3hntskcxKc78Wzndzdh2/pKkb7EdvuL9F3qgzcxxnzsSXIRT3
-ZjhBSSn7k3l1UEhQrY+hr8fAKD7rMV2E+TJtoDdsqNFfk5Px21lxVjDE1g2F
-/kneP9I+XILf5NAMonQPUC2KL7iLmXuO4GbsSgY+nYl31tebGfGUqy/wzZd9
-aHrkPAWOdSrEPepm6bjRLIPo1GZOYUdUeNmE2b+tdRjFpfdcuoO5VE0oTrcS
-ZXCjz9OwTmQLDKIAIxbqkcpMuPbHV5ZSDsmxQg4bBiPT0/OhmlMijlTr9Hy6
-F5L6ly9eHHz+LC7Bg2phoK1rSUhKqXC6xFiKDmE7lAIEJF5e8BkkbT2Rg+Hz
-QbVAPIhbyoQ7nQvg81JJ99vuvcEzvyrkDYsrSZrDcVCSJB0BfP9yMSUCb2z5
-SV79Vbt4NH6DGJJEJpL44x9fHqG8obcm5JUUwYN+LdNlCP2r0fnd2J0bNAkJ
-c2cEZ7qZS92WxFXPDPLWCCDCQOibAjHUp+835N+TxMbrdLC72+5VAxawNzTP
-D+lYTEHSvbOlC0GVPYzf3YNMeQ5wxe8IxSbGaeg86/DqBhfUfznjlTdxILh1
-0UCLPCj5bVvFmmYitoP4r73ONxg/U5pH8ZJNSF4cuR+6LzsqANYMZTS0sRTY
-SWN8Rpx1xlq8u11qqwXIoGSve6tKAERqj4l6Zz2rkwdWMqNI7xcGBKQz2Isl
-eePJSe+1oVD1Hx08l1lZfPD86BX5LgeSrxApYSxLjjpx0IaiID6JN+hEJMMa
-ej2peIqVVy9ePqc3Ma4gRpfqaBn490FnkE+dnV7v9WF/K9ZyLCqR8KLqicMJ
-ftUqzXFj3UhhZdXKKwHBstNs2pRI7lzJyuDxalum5CjRmvD7mCfXJ7/DcoOx
-smXwFh3e+AoveM7gsvj4cKzKlt4qNvmfv5kDlAy3ap+pk4zerCtQ6obRYedB
-W/fs/BOrF1VaNTEAAA==
+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
 
 -->
 

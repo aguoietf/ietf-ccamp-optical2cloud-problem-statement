@@ -39,14 +39,6 @@ normative:
     seriesinfo: ETSI GR F5G 001
     target: https://www.etsi.org/deliver/etsi_gr/F5G/001_099/001/01.01.01_60/gr_F5G001v010101p.pdf
 
-  ITU-T.SG15.Q11/15.WI.G.osu:
-    title: Optical Service Unit (OSU) Path Layer Network
-    author:
-      org: ITU-T SG15
-    date: December 2020
-    seriesinfo: ITU-T SG15 Q11/15 WI G.osu
-    target: https://www.etsi.org/deliver/etsi_gr/F5G/001_099/001/01.01.01_60/gr_F5G001v010101p.pdf
-
 --- abstract
 
    Many applications, including optical leased line, cloud VR and computing cloud, benefit from the network
@@ -80,10 +72,9 @@ normative:
    ODU0 (Optical Data Unit 0) and above.  This bandwidth granularity is typically more than what a
    single application would demand, therefore, user traffic usually needs to be aggregated before
    being carried forward through the network.  However, advanced OTN technologies developed in ITU-T
-   work items have aimed to enhance OTN to support services of smaller granularity with
-   the introduction of the Optical Service Unit (OSU) {{ITU-T.SG15.Q11/15.WI.G.osu}}.  These enhancements make OTN an even more
-   suitable solution for bearing cloud traffic with high quality and bandwidth granularity close to
-   what an IP/Ethernet-based network could offer.
+   work items have aimed to enhance OTN to support services of much finer granularity.  These enhancements,
+   when implemented, will make OTN an even more suitable solution for bearing cloud traffic with high quality
+   and bandwidth granularity close to what an IP/Ethernet-based network could offer.
  
    Many cloud-based services that require high bandwdith, deterministic service quality, and flexible
    access could potentially benefit from the network scenario of using OTN-based aggregation networks
@@ -155,7 +146,7 @@ normative:
    missing and are required for establishing P2MP and MP2MP connetctions with OTN resources,
    i.e., time slots.
  
-## Service-awareness
+## Service Awareness
  
    Cloud-oriented services are dynamic in nature with frequent changes in bandwidth and quality
    of service (QoS) requirements.  However, in typical OTN scenarios, OTN connections are
@@ -171,15 +162,22 @@ normative:
  
    New service-aware capabilties are needed for both the control plane and data plane to address
    this challenge for OTNs.  In the data plane, new hardware that can examine cloud traffic
-   packet header fields (such as the IP header destination IP address and/or the type of service
-   (TOS) field, virtual routing and forwarding (VRF) identifiers, or layer 2 virtual laocal area
-   network (VLAN) identifiers) are introduced to make the PE node able to sense the type of
-   traffic.  This work for the data plane is out of the scope of this document.
+   packet header fields (such as the IP header source and destination IP address and/or the type of service
+   (TOS) field, virtual routing and forwarding (VRF) identifiers, layer 2 Media Access Control (MAC)
+   address or virtual local area network (VLAN) identifiers) are introduced to make the PE node
+   able to sense the type of traffic.  This work for the data plane is out of the scope of this document.
  
-   Upon examinining the cloud traffic header fields and obtaining client inforamtion such as the
-   cloud destination and QoS requirements, the PE node needs to forward such information to the
-   control entity of the OTN to make decisions on connection configurations.  The client
-   information could include, but is not limited to, the destination IP addresses, type of cloud
+   Being service aware allows the OTN network to accurately identify the characteristics of carried
+   client service flows and the real-time traffic of each flow, making it possible to achieve automated and 
+   real-time operations such as dynamic connection establishment and dynamic bandwidth adjustment according 
+   to preset policies. Those capabilities help to optimize the resource utilization and significantly
+   reduce the operational cost of the network.
+
+   Upon examining the client traffic header fields and obtaining client information such as the
+   cloud destination and QoS requirements, the OTN PE node needs to forward such information to the
+   control entity of the OTN to make decisions on connection configurations, and map the client packets
+   of different destination/QoS to different ODU connections The client information could include, 
+   but is not limited to, the destination IP addresses, type of cloud
    service, and QoS information such as bandwidth, latency bounds, and resiliency factors.  The
    control entity may be an SDN controller or a control plane instace: in the former case
    communications are established between each of the PE nodes and the controller, and the
@@ -195,6 +193,63 @@ normative:
    extensions to support optical networks. Therefore, PCEP seems to be a better protocol choice
    in this case.
  
+# Framework
+
+## Service Identification and Mapping
+
+   The OTN PE node should support the learning and identification of the packet header carried 
+   by client services. The identification content may include but not limited to the following
+   content:
+
+   -  Source and destination MAC addresses
+
+   -  Source and destination IP addresses
+
+   -  VRF identifier
+
+   -  VLAN (S-VLAN and/or C-VLAN) identifier
+
+   -  MPLS label
+
+   The OTN PE node should support reporting the above identified client services to the management
+   and control system, which can obtain the client-side addresses reported by each node in the entire
+   network to build up a global topology. Some of the learnt content, such as the VLAN identifier,
+   are not required to be reported since VLAN is of only local significance.
+   
+   The management and control system should be able to calculate the corresponding ODU connection route
+   based on the source and destination addresses of the service, and create the mapping between service
+   address and the ODU cnnection according to preset policies. The mapping table can be generated
+   through management plane configuration or control plane protocol. 
+
+## Reporting Service Identification
+
+   The control plane protocol extension should report to the controller service identification contents, which
+   should include at least the following content:
+
+   -  A private network or network slice identifier, which is a globally unique identifier to identify different
+   tenants or applications supported by the private network
+
+   -  OTN node identifier, which identify the OTN PE node that reported this packet
+
+   -  The IP/MAC address of the client side learned by the OTN PE node
+
+   When the PCEP protocol is used, this extension may be defined as a PCEP Report message.
+
+## Configuring Service Mapping
+
+   The control plane protocol extension may be defined to push the mapping table between service address to 
+   ODU connections from the controller to the OTN PE nodes. The message should include at least the following
+   content:
+
+   -  A private network or network slice identifier, which is a globally unique identifier to identify different
+   tenants or applications supported by the private network
+
+   -  A mapping table of {service address, ODU connection identifier}, with each entry of the table contains
+   at least the information of {remote OTN node, remote service address}, where the concept of "remote" is
+   based on the perspective of the OTN device that receives this packet
+
+   When the PCEP protocol is used, this extension may be defined as a PCEP Update message.
+
 # Manageability Considerations
  
    TBD
