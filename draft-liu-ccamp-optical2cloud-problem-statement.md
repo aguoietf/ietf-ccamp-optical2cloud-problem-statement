@@ -1,10 +1,10 @@
 ---
 coding: utf-8
  
-title: Problem Statement and Gap Analyis for Connecting to Cloud DCs via Optical Networks
+title: Problem Statement and Gap Analysis for Connecting to Cloud DCs via Optical Networks
  
 abbrev: Cloud Optical Problem Statement
-docname: draft-liu-ccamp-optical2cloud-problem-statement-01
+docname: draft-liu-ccamp-optical2cloud-problem-statement-02
 workgroup: CCAMP Working Group
 category: std
 ipr: trust200902
