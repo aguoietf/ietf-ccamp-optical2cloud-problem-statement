@@ -29,6 +29,10 @@ author:
     name: Yang Zhao
     org: China Mobile
     email: zhaoyangyjy@chinamobile.com
+  -
+    name: Daniel King
+    org: Old Dog Consulting
+    email: daniel@olddog.co.uk
 
 normative:
   ETSI.GR.F5G.001:
