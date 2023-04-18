@@ -10,7 +10,7 @@
 <?rfc symrefs="yes"?>
 <?rfc comments="yes"?>
 
-<rfc ipr="trust200902" docName="draft-liu-ccamp-optical2cloud-problem-statement-03" category="std">
+<rfc ipr="trust200902" docName="draft-liu-ccamp-optical2cloud-problem-statement-04" category="std">
 
   <front>
     <title abbrev="Cloud Optical Problem Statement">Problem Statement and Gap Analysis for Connecting to Cloud DCs via Optical Networks</title>
@@ -46,7 +46,7 @@
       </address>
     </author>
 
-    <date year="2022" month="October" day="21"/>
+    <date year="2023" month="April" day="18"/>
 
     
     <workgroup>CCAMP Working Group</workgroup>
@@ -430,9 +430,9 @@
 
 
 
-<reference anchor='I-D.ietf-rtgwg-net2cloud-problem-statement'>
+<reference anchor='I-D.ietf-rtgwg-net2cloud-problem-statement' target='https://datatracker.ietf.org/doc/html/draft-ietf-rtgwg-net2cloud-problem-statement-24'>
    <front>
-      <title>Dynamic Networks to Hybrid Cloud DCs Problem Statement</title>
+      <title>Status of this Memo</title>
       <author fullname='Linda Dunbar' initials='L.' surname='Dunbar'>
          <organization>Futurewei</organization>
       </author>
@@ -448,33 +448,30 @@
       <author fullname='Kausik Majumdar' initials='K.' surname='Majumdar'>
          <organization>Microsoft</organization>
       </author>
-      <date day='25' month='July' year='2022'/>
+      <date day='14' month='April' year='2023'/>
       <abstract>
 	 <t>   This document describes the network-related problems enterprises
-   face today when interconnecting their branch offices with dynamic
-   workloads in third-party data centers (a.k.a. Cloud DCs). There can
-   be many problems associated with connecting to or among Clouds; the
-   Net2Cloud problem statements are mainly for enterprises who already
-   have traditional MPLS services and are interested in leveraging
-   those networks (instead of completely abandoning them). This
-   document aims to describe the problems of continuing using the MPLS
-   networks when connecting workloads in the Cloud, and to clarify
-   additional work in the IETF Routing area. Other problems are out of
-   the scope of this document.
-
-   Current operational problems are examined to determine whether there
-   is a need to improve existing protocols or whether a new protocol is
-   necessary to solve them.
+   face at the moment of writing this specification when
+   interconnecting their branch offices with dynamic workloads in
+   third-party data centers (a.k.a. Cloud DCs) and some mitigation
+   practices. There can be many problems associated with connecting to
+   or among Cloud DCs; the Net2Cloud problem statements are mainly for
+   enterprises that already have traditional VPN services and are
+   interested in leveraging those networks (instead of altogether
+   abandoning them). Other problems are out of the scope of this
+   document.
+   This document also describes the mitigation practices for getting
+   around the identified problems.
 
 	 </t>
       </abstract>
    </front>
-   <seriesInfo name='Internet-Draft' value='draft-ietf-rtgwg-net2cloud-problem-statement-15'/>
-   <format target='https://www.ietf.org/archive/id/draft-ietf-rtgwg-net2cloud-problem-statement-15.txt' type='TXT'/>
+   <seriesInfo name='Internet-Draft' value='draft-ietf-rtgwg-net2cloud-problem-statement-24'/>
+   
 </reference>
 
 
-<reference anchor='I-D.ietf-rtgwg-net2cloud-gap-analysis'>
+<reference anchor='I-D.ietf-rtgwg-net2cloud-gap-analysis' target='https://datatracker.ietf.org/doc/html/draft-ietf-rtgwg-net2cloud-gap-analysis-09'>
    <front>
       <title>Networks Connecting to Hybrid Cloud DCs: Gap Analysis</title>
       <author fullname='Linda Dunbar' initials='L.' surname='Dunbar'>
@@ -496,7 +493,7 @@
       </abstract>
    </front>
    <seriesInfo name='Internet-Draft' value='draft-ietf-rtgwg-net2cloud-gap-analysis-09'/>
-   <format target='https://www.ietf.org/archive/id/draft-ietf-rtgwg-net2cloud-gap-analysis-09.txt' type='TXT'/>
+   
 </reference>
 
 
@@ -515,11 +512,11 @@
   </back>
 
 <!-- ##markdown-source:
-H4sIADHBUWMAA9VbXXPbOLJ996/ATV7sHUl2nGQ2462tOx7b8bg2dnxjJ1O7
+H4sIAJeoPmQAA9VbXXPbOLJ996/ATV7sHUl2nGQ2462tOx7b8bg2dnxjJ1O7
 N7dSEAlJnFAEhyDtUeLsb7+nuwEQlOVktmpf1vsRmwKBRn+cPt2AxuPxVmbz
 opofqK6djV9sqa22aEtzoC4bOy3NUl21ujVLU7VKV7k61bU6rHS5coVTM9uo
 I1tVJmsxg2qtOiptl6vjI6duCq1e122R6VJdmPbWNh8dJtfTaWNuDvzAMODe
-Wlu5zSq9hBh5o2ftuCy6cZbpZT228sp+RhOMa3lx7MKL472nW7TWvLFdjWWO
+Wlu5zSq9hBh5o2ftuCy6cZbpZT228sp+RhOMa3lx7MKL471nW7TWvLFdjWWO
 Ds8v1S94QAKe0sOtDEPntlkdKNfmW0XdHKi26Vy7v7f3w94+ZMRkVf5Bl7bC
 +ivjturiQP1va7ORcrZpGzNz+G21lF8yu6SF3f/R7rp2YZuDLaXG+J9SsoWr
 hcHir4qOn9kGuj5aFJVW53ZalIafmqUuygOFfToafVv+mNGQJY+YYI21OX/W
@@ -642,7 +639,7 @@ XOabXcn3Evyp5P7eU7nLFx483X9B9R83I76ySIVIW3DnIlwEBAMJT8IOehXJ
 ZTJK+eVDorx49vwpfanhHGq08ZxPLiSnhWtKC7ePjy520tbBxnqd+xlVBldg
 isVr8nc54j3TcK5F3ks326UG5eoo3p011U3R2IqNwdc/uyp27+Ja7OdnhxeH
 f8BzvbOyZ/Ar2n+lxH+DbIqgxK+fD1TV0XcVTf7XRzMUtoavkjxWhxl9dac0
-+dxfbewjaOM7W/8PfYdiG8w8AAA=
++dxfbewjaOM7W/8PE63hfcw8AAA=
 
 -->
 
