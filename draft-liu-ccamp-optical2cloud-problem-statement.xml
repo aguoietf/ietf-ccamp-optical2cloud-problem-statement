@@ -10,7 +10,7 @@
 <?rfc symrefs="yes"?>
 <?rfc comments="yes"?>
 
-<rfc ipr="trust200902" docName="draft-liu-ccamp-optical2cloud-problem-statement-04" category="std">
+<rfc ipr="trust200902" docName="draft-liu-ccamp-optical2cloud-problem-statement-05" category="std">
 
   <front>
     <title abbrev="Cloud Optical Problem Statement">Problem Statement and Gap Analysis for Connecting to Cloud DCs via Optical Networks</title>
@@ -46,7 +46,7 @@
       </address>
     </author>
 
-    <date year="2023" month="April" day="18"/>
+    <date year="2023" month="October" day="12"/>
 
     
     <workgroup>CCAMP Working Group</workgroup>
@@ -55,11 +55,14 @@
     <abstract>
 
 
-<t>Many applications, including optical leased line, cloud VR and computing cloud, benefit from the network
-   scenario where the data traffic to cloud data centers (DCs) is carried end-to-end over an optical network.
-   This document describes the problem statement and requirements for connecting to cloud DCs over optical
-   networks, and presents a gap analysis for existing control plane protocols for supporting this network
-   scenario.</t>
+<t>Optical networking technologies such as fine-grain OTN (fgOTN) enable premium cloud-based services,
+   including optical leased line, cloud Virtual Reality (cloud-VR), and computing to be carried end-to-end 
+   optically between applications and cloud data centers (DCs), offering premium quality and deterministic
+   performance.</t>
+
+<t>This document describes the problem statement and requirements for accessing cloud services through optical 
+   networks. It also discusses technical gaps for IETF-developed management and control protocols to support 
+   service provisioning and management in such an all-optical network scenario.</t>
 
 
 
@@ -94,9 +97,11 @@
    ODU0 (Optical Data Unit 0) and above.  This bandwidth granularity is typically more than what a
    single application would demand, therefore, user traffic usually needs to be aggregated before
    being carried forward through the network.  However, advanced OTN technologies developed in ITU-T
-   work items have aimed to enhance OTN to support services of much finer granularity.  These enhancements,
-   when implemented, will make OTN an even more suitable solution for bearing cloud traffic with high quality
-   and bandwidth granularity close to what an IP/Ethernet-based network could offer.</t>
+   work items have aimed to enhance OTN to support services of much finer granularity.  These enhancements are
+   reflected in the latest transmission standards of fine-grain OTN, or fgOTN, development by the
+   ITU-T Q11/SG15 <xref target="ITU-T.G.709.20-DRAFT"/>. fgOTN enables an even more suitable solution to bear cloud traffic with high quality
+   and finer bandwidth granularity up to 10Mbps per time slot, which is very close to what an
+   IP/Ethernet-based network could offer.</t>
 
 <t>Many cloud-based services that require high bandwdith, deterministic service quality, and flexible
    access could potentially benefit from the network scenario of using OTN-based aggregation networks
@@ -124,11 +129,13 @@
 
 <section anchor="multi-cloud-access"><name>Multi-cloud Access</name>
 
-<t>Cloud services are deployed in geographically distributed locations for scalability and resilliency,
-   and they are usually hosted by multiple interconnected DCs.  DCs have usually been interconnected
-   through Layer 2/3 switches or routers with full mesh connectivity.  To improve interaction
-   efficiency as well as service experience, OTN is also considered as an option for DC interconnection.
-   This network scenario is illustrated in <xref target="fig-cloud-access-optical"/>.</t>
+<t>Cloud services are typically deployed in geographically distributed locations for scalability and resilliency,
+   and hosted by multiple DCs, each of which provides different cloud applications. This requires a 
+   Point-to-Multi-Point (P2MP) or Multi-Point-to-Multi-Point (MP2MP) connectivity between service access
+   points and the cloud DCs. The connectivities are traditionally provided over Layer 2/3 connections. To improve interaction
+   efficiency as well as service experience, OTN (including fgOTN) is also considered as a viable 
+   option for DC interconnection. This network scenario is illustrated in the example scenario 
+   <xref target="fig-cloud-access-optical"/>.</t>
 
 <figure title="Multi-cloud access through an OTN" anchor="fig-cloud-access-optical"><artwork><![CDATA[
       __________                                             ________
@@ -146,8 +153,8 @@
  
 ]]></artwork></figure>
 
-<t>A customer application is connected to the cloud via one of the Customer Premises
-   Equipment (CPE), and access cloud services are hosted in multiple clouds that are
+<t>In this example, a customer application is connected to the cloud via one of the Customer Premises
+   Equipment (CPE), and cloud services are hosted in multiple clouds that are
    attached to different cloud gateways.  Layer 2 or Layer 3 Virtual Private Networks
    (L2VPN or L3VPN) are used as overlay services on top of the OTN to support
    multi-cloud access.  Serving as an overlay, the OTNs should provide the
@@ -317,107 +324,123 @@
   </front>
   <seriesInfo name="ETSI GR F5G 001" value=""/>
 </reference>
-
-
+<reference anchor="ITU-T.G.709.20-DRAFT" target="https://www.itu.int/itu-t/workprog/wp_item.aspx?isn=18873">
+  <front>
+    <title>Overview of fine grain OTN</title>
+    <author >
+      <organization>ITU Telecommunication Standardization Sector (ITU-T)</organization>
+    </author>
+    <date year="2023" month="December"/>
+  </front>
+  <seriesInfo name="ITU-T G.709.20" value=""/>
+</reference>
 
 
 <reference anchor='RFC4461' target='https://www.rfc-editor.org/info/rfc4461'>
-<front>
-<title>Signaling Requirements for Point-to-Multipoint Traffic-Engineered MPLS Label Switched Paths (LSPs)</title>
-<author fullname='S. Yasukawa' initials='S.' role='editor' surname='Yasukawa'><organization/></author>
-<date month='April' year='2006'/>
-<abstract><t>This document presents a set of requirements for the establishment and maintenance of Point-to-Multipoint (P2MP) Traffic-Engineered (TE) Multiprotocol Label Switching (MPLS) Label Switched Paths (LSPs).</t><t>There is no intent to specify solution-specific details or application-specific requirements in this document.</t><t>The requirements presented in this document not only apply to packet-switched networks under the control of MPLS protocols, but also encompass the requirements of Layer Two Switching (L2SC), Time Division Multiplexing (TDM), lambda, and port switching networks managed by Generalized MPLS (GMPLS) protocols.  Protocol solutions developed to meet the requirements set out in this document must attempt to be equally applicable to MPLS and GMPLS.  This memo provides information for the Internet community.</t></abstract>
-</front>
-<seriesInfo name='RFC' value='4461'/>
-<seriesInfo name='DOI' value='10.17487/RFC4461'/>
+  <front>
+    <title>Signaling Requirements for Point-to-Multipoint Traffic-Engineered MPLS Label Switched Paths (LSPs)</title>
+    <author fullname='S. Yasukawa' initials='S.' role='editor' surname='Yasukawa'/>
+    <date month='April' year='2006'/>
+    <abstract>
+      <t>This document presents a set of requirements for the establishment and maintenance of Point-to-Multipoint (P2MP) Traffic-Engineered (TE) Multiprotocol Label Switching (MPLS) Label Switched Paths (LSPs).</t>
+      <t>There is no intent to specify solution-specific details or application-specific requirements in this document.</t>
+      <t>The requirements presented in this document not only apply to packet-switched networks under the control of MPLS protocols, but also encompass the requirements of Layer Two Switching (L2SC), Time Division Multiplexing (TDM), lambda, and port switching networks managed by Generalized MPLS (GMPLS) protocols. Protocol solutions developed to meet the requirements set out in this document must attempt to be equally applicable to MPLS and GMPLS. This memo provides information for the Internet community.</t>
+    </abstract>
+  </front>
+  <seriesInfo name='RFC' value='4461'/>
+  <seriesInfo name='DOI' value='10.17487/RFC4461'/>
 </reference>
-
-
 
 <reference anchor='RFC6388' target='https://www.rfc-editor.org/info/rfc6388'>
-<front>
-<title>Label Distribution Protocol Extensions for Point-to-Multipoint and Multipoint-to-Multipoint Label Switched Paths</title>
-<author fullname='IJ. Wijnands' initials='IJ.' role='editor' surname='Wijnands'><organization/></author>
-<author fullname='I. Minei' initials='I.' role='editor' surname='Minei'><organization/></author>
-<author fullname='K. Kompella' initials='K.' surname='Kompella'><organization/></author>
-<author fullname='B. Thomas' initials='B.' surname='Thomas'><organization/></author>
-<date month='November' year='2011'/>
-<abstract><t>This document describes extensions to the Label Distribution Protocol (LDP) for the setup of point-to-multipoint (P2MP) and multipoint-to-multipoint (MP2MP) Label Switched Paths (LSPs) in MPLS networks. These extensions are also referred to as multipoint LDP.  Multipoint LDP constructs the P2MP or MP2MP LSPs without interacting with or relying upon any other multicast tree construction protocol.  Protocol elements and procedures for this solution are described for building such LSPs in a receiver-initiated manner.  There can be various applications for multipoint LSPs, for example IP multicast or support for multicast in BGP/MPLS Layer 3 Virtual Private Networks (L3VPNs). Specification of how such applications can use an LDP signaled  multipoint LSP is outside the scope of this document.   [STANDARDS-TRACK]</t></abstract>
-</front>
-<seriesInfo name='RFC' value='6388'/>
-<seriesInfo name='DOI' value='10.17487/RFC6388'/>
+  <front>
+    <title>Label Distribution Protocol Extensions for Point-to-Multipoint and Multipoint-to-Multipoint Label Switched Paths</title>
+    <author fullname='IJ. Wijnands' initials='IJ.' role='editor' surname='Wijnands'/>
+    <author fullname='I. Minei' initials='I.' role='editor' surname='Minei'/>
+    <author fullname='K. Kompella' initials='K.' surname='Kompella'/>
+    <author fullname='B. Thomas' initials='B.' surname='Thomas'/>
+    <date month='November' year='2011'/>
+    <abstract>
+      <t>This document describes extensions to the Label Distribution Protocol (LDP) for the setup of point-to-multipoint (P2MP) and multipoint-to-multipoint (MP2MP) Label Switched Paths (LSPs) in MPLS networks. These extensions are also referred to as multipoint LDP. Multipoint LDP constructs the P2MP or MP2MP LSPs without interacting with or relying upon any other multicast tree construction protocol. Protocol elements and procedures for this solution are described for building such LSPs in a receiver-initiated manner. There can be various applications for multipoint LSPs, for example IP multicast or support for multicast in BGP/MPLS Layer 3 Virtual Private Networks (L3VPNs). Specification of how such applications can use an LDP signaled multipoint LSP is outside the scope of this document. [STANDARDS-TRACK]</t>
+    </abstract>
+  </front>
+  <seriesInfo name='RFC' value='6388'/>
+  <seriesInfo name='DOI' value='10.17487/RFC6388'/>
 </reference>
-
-
 
 <reference anchor='RFC5440' target='https://www.rfc-editor.org/info/rfc5440'>
-<front>
-<title>Path Computation Element (PCE) Communication Protocol (PCEP)</title>
-<author fullname='JP. Vasseur' initials='JP.' role='editor' surname='Vasseur'><organization/></author>
-<author fullname='JL. Le Roux' initials='JL.' role='editor' surname='Le Roux'><organization/></author>
-<date month='March' year='2009'/>
-<abstract><t>This document specifies the Path Computation Element (PCE) Communication Protocol (PCEP) for communications between a Path Computation Client (PCC) and a PCE, or between two PCEs.  Such interactions include path computation requests and path computation replies as well as notifications of specific states related to the use of a PCE in the context of Multiprotocol Label Switching (MPLS) and Generalized MPLS (GMPLS) Traffic Engineering.  PCEP is designed to be flexible and extensible so as to easily allow for the addition of further messages and objects, should further requirements be expressed in the future.  [STANDARDS-TRACK]</t></abstract>
-</front>
-<seriesInfo name='RFC' value='5440'/>
-<seriesInfo name='DOI' value='10.17487/RFC5440'/>
+  <front>
+    <title>Path Computation Element (PCE) Communication Protocol (PCEP)</title>
+    <author fullname='JP. Vasseur' initials='JP.' role='editor' surname='Vasseur'/>
+    <author fullname='JL. Le Roux' initials='JL.' role='editor' surname='Le Roux'/>
+    <date month='March' year='2009'/>
+    <abstract>
+      <t>This document specifies the Path Computation Element (PCE) Communication Protocol (PCEP) for communications between a Path Computation Client (PCC) and a PCE, or between two PCEs. Such interactions include path computation requests and path computation replies as well as notifications of specific states related to the use of a PCE in the context of Multiprotocol Label Switching (MPLS) and Generalized MPLS (GMPLS) Traffic Engineering. PCEP is designed to be flexible and extensible so as to easily allow for the addition of further messages and objects, should further requirements be expressed in the future. [STANDARDS-TRACK]</t>
+    </abstract>
+  </front>
+  <seriesInfo name='RFC' value='5440'/>
+  <seriesInfo name='DOI' value='10.17487/RFC5440'/>
 </reference>
-
-
 
 <reference anchor='RFC7752' target='https://www.rfc-editor.org/info/rfc7752'>
-<front>
-<title>North-Bound Distribution of Link-State and Traffic Engineering (TE) Information Using BGP</title>
-<author fullname='H. Gredler' initials='H.' role='editor' surname='Gredler'><organization/></author>
-<author fullname='J. Medved' initials='J.' surname='Medved'><organization/></author>
-<author fullname='S. Previdi' initials='S.' surname='Previdi'><organization/></author>
-<author fullname='A. Farrel' initials='A.' surname='Farrel'><organization/></author>
-<author fullname='S. Ray' initials='S.' surname='Ray'><organization/></author>
-<date month='March' year='2016'/>
-<abstract><t>In a number of environments, a component external to a network is called upon to perform computations based on the network topology and current state of the connections within the network, including Traffic Engineering (TE) information.  This is information typically distributed by IGP routing protocols within the network.</t><t>This document describes a mechanism by which link-state and TE information can be collected from networks and shared with external components using the BGP routing protocol.  This is achieved using a new BGP Network Layer Reachability Information (NLRI) encoding format.  The mechanism is applicable to physical and virtual IGP links.  The mechanism described is subject to policy control.</t><t>Applications of this technique include Application-Layer Traffic Optimization (ALTO) servers and Path Computation Elements (PCEs).</t></abstract>
-</front>
-<seriesInfo name='RFC' value='7752'/>
-<seriesInfo name='DOI' value='10.17487/RFC7752'/>
+  <front>
+    <title>North-Bound Distribution of Link-State and Traffic Engineering (TE) Information Using BGP</title>
+    <author fullname='H. Gredler' initials='H.' role='editor' surname='Gredler'/>
+    <author fullname='J. Medved' initials='J.' surname='Medved'/>
+    <author fullname='S. Previdi' initials='S.' surname='Previdi'/>
+    <author fullname='A. Farrel' initials='A.' surname='Farrel'/>
+    <author fullname='S. Ray' initials='S.' surname='Ray'/>
+    <date month='March' year='2016'/>
+    <abstract>
+      <t>In a number of environments, a component external to a network is called upon to perform computations based on the network topology and current state of the connections within the network, including Traffic Engineering (TE) information. This is information typically distributed by IGP routing protocols within the network.</t>
+      <t>This document describes a mechanism by which link-state and TE information can be collected from networks and shared with external components using the BGP routing protocol. This is achieved using a new BGP Network Layer Reachability Information (NLRI) encoding format. The mechanism is applicable to physical and virtual IGP links. The mechanism described is subject to policy control.</t>
+      <t>Applications of this technique include Application-Layer Traffic Optimization (ALTO) servers and Path Computation Elements (PCEs).</t>
+    </abstract>
+  </front>
+  <seriesInfo name='RFC' value='7752'/>
+  <seriesInfo name='DOI' value='10.17487/RFC7752'/>
 </reference>
-
-
 
 <reference anchor='RFC4203' target='https://www.rfc-editor.org/info/rfc4203'>
-<front>
-<title>OSPF Extensions in Support of Generalized Multi-Protocol Label Switching (GMPLS)</title>
-<author fullname='K. Kompella' initials='K.' role='editor' surname='Kompella'><organization/></author>
-<author fullname='Y. Rekhter' initials='Y.' role='editor' surname='Rekhter'><organization/></author>
-<date month='October' year='2005'/>
-<abstract><t>This document specifies encoding of extensions to the OSPF routing protocol in support of Generalized Multi-Protocol Label Switching (GMPLS).  [STANDARDS-TRACK]</t></abstract>
-</front>
-<seriesInfo name='RFC' value='4203'/>
-<seriesInfo name='DOI' value='10.17487/RFC4203'/>
+  <front>
+    <title>OSPF Extensions in Support of Generalized Multi-Protocol Label Switching (GMPLS)</title>
+    <author fullname='K. Kompella' initials='K.' role='editor' surname='Kompella'/>
+    <author fullname='Y. Rekhter' initials='Y.' role='editor' surname='Rekhter'/>
+    <date month='October' year='2005'/>
+    <abstract>
+      <t>This document specifies encoding of extensions to the OSPF routing protocol in support of Generalized Multi-Protocol Label Switching (GMPLS). [STANDARDS-TRACK]</t>
+    </abstract>
+  </front>
+  <seriesInfo name='RFC' value='4203'/>
+  <seriesInfo name='DOI' value='10.17487/RFC4203'/>
 </reference>
-
-
 
 <reference anchor='RFC4328' target='https://www.rfc-editor.org/info/rfc4328'>
-<front>
-<title>Generalized Multi-Protocol Label Switching (GMPLS) Signaling Extensions for G.709 Optical Transport Networks Control</title>
-<author fullname='D. Papadimitriou' initials='D.' role='editor' surname='Papadimitriou'><organization/></author>
-<date month='January' year='2006'/>
-<abstract><t>This document is a companion to the Generalized Multi-Protocol Label Switching (GMPLS) signaling documents.  It describes the technology-specific information needed to extend GMPLS signaling to control Optical Transport Networks (OTN); it also includes the so-called pre-OTN developments.  [STANDARDS-TRACK]</t></abstract>
-</front>
-<seriesInfo name='RFC' value='4328'/>
-<seriesInfo name='DOI' value='10.17487/RFC4328'/>
+  <front>
+    <title>Generalized Multi-Protocol Label Switching (GMPLS) Signaling Extensions for G.709 Optical Transport Networks Control</title>
+    <author fullname='D. Papadimitriou' initials='D.' role='editor' surname='Papadimitriou'/>
+    <date month='January' year='2006'/>
+    <abstract>
+      <t>This document is a companion to the Generalized Multi-Protocol Label Switching (GMPLS) signaling documents. It describes the technology-specific information needed to extend GMPLS signaling to control Optical Transport Networks (OTN); it also includes the so-called pre-OTN developments. [STANDARDS-TRACK]</t>
+    </abstract>
+  </front>
+  <seriesInfo name='RFC' value='4328'/>
+  <seriesInfo name='DOI' value='10.17487/RFC4328'/>
 </reference>
 
-
-
 <reference anchor='RFC8453' target='https://www.rfc-editor.org/info/rfc8453'>
-<front>
-<title>Framework for Abstraction and Control of TE Networks (ACTN)</title>
-<author fullname='D. Ceccarelli' initials='D.' role='editor' surname='Ceccarelli'><organization/></author>
-<author fullname='Y. Lee' initials='Y.' role='editor' surname='Lee'><organization/></author>
-<date month='August' year='2018'/>
-<abstract><t>Traffic Engineered (TE) networks have a variety of mechanisms to facilitate the separation of the data plane and control plane.  They also have a range of management and provisioning protocols to configure and activate network resources.  These mechanisms represent key technologies for enabling flexible and dynamic networking.  The term &quot;Traffic Engineered network&quot; refers to a network that uses any connection-oriented technology under the control of a distributed or centralized control plane to support dynamic provisioning of end-to- end connectivity.</t><t>Abstraction of network resources is a technique that can be applied to a single network domain or across multiple domains to create a single virtualized network that is under the control of a network operator or the customer of the operator that actually owns the network resources.</t><t>This document provides a framework for Abstraction and Control of TE Networks (ACTN) to support virtual network services and connectivity services.</t></abstract>
-</front>
-<seriesInfo name='RFC' value='8453'/>
-<seriesInfo name='DOI' value='10.17487/RFC8453'/>
+  <front>
+    <title>Framework for Abstraction and Control of TE Networks (ACTN)</title>
+    <author fullname='D. Ceccarelli' initials='D.' role='editor' surname='Ceccarelli'/>
+    <author fullname='Y. Lee' initials='Y.' role='editor' surname='Lee'/>
+    <date month='August' year='2018'/>
+    <abstract>
+      <t>Traffic Engineered (TE) networks have a variety of mechanisms to facilitate the separation of the data plane and control plane. They also have a range of management and provisioning protocols to configure and activate network resources. These mechanisms represent key technologies for enabling flexible and dynamic networking. The term "Traffic Engineered network" refers to a network that uses any connection-oriented technology under the control of a distributed or centralized control plane to support dynamic provisioning of end-to- end connectivity.</t>
+      <t>Abstraction of network resources is a technique that can be applied to a single network domain or across multiple domains to create a single virtualized network that is under the control of a network operator or the customer of the operator that actually owns the network resources.</t>
+      <t>This document provides a framework for Abstraction and Control of TE Networks (ACTN) to support virtual network services and connectivity services.</t>
+    </abstract>
+  </front>
+  <seriesInfo name='RFC' value='8453'/>
+  <seriesInfo name='DOI' value='10.17487/RFC8453'/>
 </reference>
 
 
@@ -430,9 +453,9 @@
 
 
 
-<reference anchor='I-D.ietf-rtgwg-net2cloud-problem-statement' target='https://datatracker.ietf.org/doc/html/draft-ietf-rtgwg-net2cloud-problem-statement-24'>
+<reference anchor='I-D.ietf-rtgwg-net2cloud-problem-statement' target='https://datatracker.ietf.org/doc/html/draft-ietf-rtgwg-net2cloud-problem-statement-30'>
    <front>
-      <title>Status of this Memo</title>
+      <title>Dynamic Networks to Hybrid Cloud DCs: Problem Statement and Mitigation Practices</title>
       <author fullname='Linda Dunbar' initials='L.' surname='Dunbar'>
          <organization>Futurewei</organization>
       </author>
@@ -448,25 +471,23 @@
       <author fullname='Kausik Majumdar' initials='K.' surname='Majumdar'>
          <organization>Microsoft</organization>
       </author>
-      <date day='14' month='April' year='2023'/>
+      <date day='22' month='September' year='2023'/>
       <abstract>
 	 <t>   This document describes the network-related problems enterprises
    face at the moment of writing this specification when
    interconnecting their branch offices with dynamic workloads in
-   third-party data centers (a.k.a. Cloud DCs) and some mitigation
-   practices. There can be many problems associated with connecting to
-   or among Cloud DCs; the Net2Cloud problem statements are mainly for
-   enterprises that already have traditional VPN services and are
-   interested in leveraging those networks (instead of altogether
+   third-party data centers (DC) (a.k.a. Cloud DCs). The Net2Cloud
+   problem statements are mainly for enterprises with traditional VPN
+   services who want to leverage those networks (instead of altogether
    abandoning them). Other problems are out of the scope of this
    document.
-   This document also describes the mitigation practices for getting
-   around the identified problems.
+   This document also describes the mitigation practices to alleviate
+   the issues caused by the identified problems.
 
 	 </t>
       </abstract>
    </front>
-   <seriesInfo name='Internet-Draft' value='draft-ietf-rtgwg-net2cloud-problem-statement-24'/>
+   <seriesInfo name='Internet-Draft' value='draft-ietf-rtgwg-net2cloud-problem-statement-30'/>
    
 </reference>
 
@@ -512,134 +533,141 @@
   </back>
 
 <!-- ##markdown-source:
-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
-+dxfbewjaOM7W/8PE63hfcw8AAA=
+H4sIAMr/JmUAA9VbW3MbN5Z+d5X/AyZ5kSYkdbGdOJpKTRRJVlRj2RpLdmpm
+s+WCukEScbPBNLol05f97fudcwA0mqKcTNW+LJOyyCYuB+fynRs4Ho8fPihc
+aevZgera6fjpwwfq4YPWtpU5UBeNu67MQl22ujULU7dK16U61Ut1WOtq5a1X
+U9eoI1fXpmixhmqdOqpcV6rjI69urFYvl60tdKVemPbWNe88L6+vrxtzcxCG
+xiF3dnv4oHRFrRegpGz0tB1XthsXhV4sx07m7Be0wngpM8c+zhzvPnn4gPab
+Na5bYqOjw/ML9QseEJGn9BDHxuCZa1YHyrflwwd22Ryotul8u7+7+/3uPlOK
+Fevyra5cDSJWBuQv7YH6r9YVI+Vd0zZm6vFutZA3hVvQ9v6/5ZhdO3fNAd6r
+Mf2jlBzmcm5AxXPbyUPXgPdHc1trde6ubWXksVloWx0onNnT+Nvqx4LGLHjI
+BDvdWfdn7RZW1+rfND5b++dO3xqrrkwxr13lZpbOkW3xgcbPZfKPcx68cf1D
+iy/VaeeytZ91bdeYLy6vadqscxNr2umPM3q4cfl/aXDl36Djz7DlA8atMGH1
+2+oP+XKsa2sq9Q874MrLClrqZqS9vqva9GXYoORJP7qqLN0My066dw8fPHxQ
+u2ahW3tjWKwnV5dnk9NXk2dPTie7u3sHskKwnmd22s7VqalNgxmuxoP3poyW
+oLYwaftv+Ccfcmymtrb89pWpjPZG7cmimTKlI5x0jVsaSPwKY0n3uhpWQbM9
+WVFd6qb06qz2oKhrjdoierdliRLaD9aYwiyuTaP2d/d35QtvGkjQ1lN3wOdT
+p68UUYnzhePpZmbaAzVv26U/2Nm5vb2dmNbbCWjaKU0F5jQ79ODtrNnBzB3M
+fLv7/ff0d2d3b8L/v/12d2fWvMXXeHqzu0f/LSfLckpMVurs6vX4anI6+W73
++8n+7vj41eGzqyF3X2KXG2tulZsq8MyoWaNtrV5evbifX1j1LqsSp+yH8BlY
+BlTbYhru5daju9ziCSoSfT+zIIyJrdsd/B23O6QMALDZzu3yrQV8TbRfvv+7
+9fUPe0+ffveI+DEej5W+9m2ji1b4k0CzFm1i7M0MUPmumCvtmTXjxBq1NZ3h
+z7YytQZiqmVjFrZbKIHRa6hbSSe6sYXxI97H1kXVkXtQAXIVa2UJXKrNSCaq
+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
 
 -->
 

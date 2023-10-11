@@ -5,29 +5,33 @@
 CCAMP Working Group                                               S. Liu
 Internet-Draft                                              China Mobile
 Intended status: Standards Track                                H. Zheng
-Expires: 20 October 2023                             Huawei Technologies
+Expires: 14 April 2024                               Huawei Technologies
                                                                   A. Guo
                                                   Futurewei Technologies
                                                                  Y. Zhao
                                                             China Mobile
                                                                  D. King
                                                       Old Dog Consulting
-                                                           18 April 2023
+                                                         12 October 2023
 
 
    Problem Statement and Gap Analysis for Connecting to Cloud DCs via
                             Optical Networks
-           draft-liu-ccamp-optical2cloud-problem-statement-04
+           draft-liu-ccamp-optical2cloud-problem-statement-05
 
 Abstract
 
-   Many applications, including optical leased line, cloud VR and
-   computing cloud, benefit from the network scenario where the data
-   traffic to cloud data centers (DCs) is carried end-to-end over an
-   optical network.  This document describes the problem statement and
-   requirements for connecting to cloud DCs over optical networks, and
-   presents a gap analysis for existing control plane protocols for
-   supporting this network scenario.
+   Optical networking technologies such as fine-grain OTN (fgOTN) enable
+   premium cloud-based services, including optical leased line, cloud
+   Virtual Reality (cloud-VR), and computing to be carried end-to-end
+   optically between applications and cloud data centers (DCs), offering
+   premium quality and deterministic performance.
+
+   This document describes the problem statement and requirements for
+   accessing cloud services through optical networks.  It also discusses
+   technical gaps for IETF-developed management and control protocols to
+   support service provisioning and management in such an all-optical
+   network scenario.
 
 Status of This Memo
 
@@ -44,19 +48,20 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 October 2023.
+   This Internet-Draft will expire on 14 April 2024.
+
+
+
+
+Liu, et al.               Expires 14 April 2024                 [Page 1]
+
+Internet-Draft       Cloud Optical Problem Statement        October 2023
+
 
 Copyright Notice
 
    Copyright (c) 2023 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
-
-
-
-Liu, et al.              Expires 20 October 2023                [Page 1]
-
-Internet-Draft       Cloud Optical Problem Statement          April 2023
-
 
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents (https://trustee.ietf.org/
@@ -70,7 +75,7 @@ Internet-Draft       Cloud Optical Problem Statement          April 2023
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-   2.  Requirements and Gap Analysis . . . . . . . . . . . . . . . .   3
+   2.  Requirements and Gap Analysis . . . . . . . . . . . . . . . .   4
      2.1.  Multi-cloud Access  . . . . . . . . . . . . . . . . . . .   4
      2.2.  Service Awareness . . . . . . . . . . . . . . . . . . . .   5
    3.  Framework . . . . . . . . . . . . . . . . . . . . . . . . . .   6
@@ -83,8 +88,8 @@ Table of Contents
    7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   8
      7.1.  Normative References  . . . . . . . . . . . . . . . . . .   8
      7.2.  Informative References  . . . . . . . . . . . . . . . . .   9
-   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .   9
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   9
+   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  10
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  10
 
 1.  Introduction
 
@@ -102,18 +107,17 @@ Table of Contents
    and management of MPLS VPNs is known to be complicated and typically
    involves manual TE configuration across the network.
 
+
+
+Liu, et al.               Expires 14 April 2024                 [Page 2]
+
+Internet-Draft       Cloud Optical Problem Statement        October 2023
+
+
    To improve the performance and flexibility of aggregated networks,
    Optical Transport Network (OTN) technology is introduced to
    complement the IP/Ethernet-based aggregation networks to enable full-
    fiber connections.  This scenario is described in the Fifth
-
-
-
-Liu, et al.              Expires 20 October 2023                [Page 2]
-
-Internet-Draft       Cloud Optical Problem Statement          April 2023
-
-
    Generation Fixed Network Architecture by the ETSI F5G ISG
    [ETSI.GR.F5G.001].  OTN can be used to provide high quality carrier
    services in addition to the traditional MPLS VPN services.  OTN
@@ -125,10 +129,12 @@ Internet-Draft       Cloud Optical Problem Statement          April 2023
    aggregated before being carried forward through the network.
    However, advanced OTN technologies developed in ITU-T work items have
    aimed to enhance OTN to support services of much finer granularity.
-   These enhancements, when implemented, will make OTN an even more
-   suitable solution for bearing cloud traffic with high quality and
-   bandwidth granularity close to what an IP/Ethernet-based network
-   could offer.
+   These enhancements are reflected in the latest transmission standards
+   of fine-grain OTN, or fgOTN, development by the ITU-T Q11/SG15
+   [ITU-T.G.709.20-DRAFT]. fgOTN enables an even more suitable solution
+   to bear cloud traffic with high quality and finer bandwidth
+   granularity up to 10Mbps per time slot, which is very close to what
+   an IP/Ethernet-based network could offer.
 
    Many cloud-based services that require high bandwdith, deterministic
    service quality, and flexible access could potentially benefit from
@@ -157,28 +163,27 @@ Internet-Draft       Cloud Optical Problem Statement          April 2023
    accessing cloud DCs through OTNs.  Data plane requirements are out of
    the scope of this document.
 
-2.  Requirements and Gap Analysis
 
 
-
-
-
-
-
-Liu, et al.              Expires 20 October 2023                [Page 3]
+Liu, et al.               Expires 14 April 2024                 [Page 3]
 
-Internet-Draft       Cloud Optical Problem Statement          April 2023
+Internet-Draft       Cloud Optical Problem Statement        October 2023
 
+
+2.  Requirements and Gap Analysis
 
 2.1.  Multi-cloud Access
 
-   Cloud services are deployed in geographically distributed locations
-   for scalability and resilliency, and they are usually hosted by
-   multiple interconnected DCs.  DCs have usually been interconnected
-   through Layer 2/3 switches or routers with full mesh connectivity.
-   To improve interaction efficiency as well as service experience, OTN
-   is also considered as an option for DC interconnection.  This network
-   scenario is illustrated in Figure 1.
+   Cloud services are typically deployed in geographically distributed
+   locations for scalability and resilliency, and hosted by multiple
+   DCs, each of which provides different cloud applications.  This
+   requires a Point-to-Multi-Point (P2MP) or Multi-Point-to-Multi-Point
+   (MP2MP) connectivity between service access points and the cloud DCs.
+   The connectivities are traditionally provided over Layer 2/3
+   connections.  To improve interaction efficiency as well as service
+   experience, OTN (including fgOTN) is also considered as a viable
+   option for DC interconnection.  This network scenario is illustrated
+   in the example scenario Figure 1.
 
        __________                                             ________
       /          \                                           /        \
@@ -195,8 +200,8 @@ Internet-Draft       Cloud Optical Problem Statement          April 2023
 
               Figure 1: Multi-cloud access through an OTN
 
-   A customer application is connected to the cloud via one of the
-   Customer Premises Equipment (CPE), and access cloud services are
+   In this example, a customer application is connected to the cloud via
+   one of the Customer Premises Equipment (CPE), and cloud services are
    hosted in multiple clouds that are attached to different cloud
    gateways.  Layer 2 or Layer 3 Virtual Private Networks (L2VPN or
    L3VPN) are used as overlay services on top of the OTN to support
@@ -216,14 +221,9 @@ Internet-Draft       Cloud Optical Problem Statement          April 2023
 
 
 
-
-
-
-
-
-Liu, et al.              Expires 20 October 2023                [Page 4]
+Liu, et al.               Expires 14 April 2024                 [Page 4]
 
-Internet-Draft       Cloud Optical Problem Statement          April 2023
+Internet-Draft       Cloud Optical Problem Statement        October 2023
 
 
    [RFC4461] defines the requirements for establishing P2MP MPLS traffic
@@ -277,9 +277,9 @@ Internet-Draft       Cloud Optical Problem Statement          April 2023
 
 
 
-Liu, et al.              Expires 20 October 2023                [Page 5]
+Liu, et al.               Expires 14 April 2024                 [Page 5]
 
-Internet-Draft       Cloud Optical Problem Statement          April 2023
+Internet-Draft       Cloud Optical Problem Statement        October 2023
 
 
    the client packets of different destination/QoS to different ODU
@@ -333,9 +333,9 @@ Internet-Draft       Cloud Optical Problem Statement          April 2023
 
 
 
-Liu, et al.              Expires 20 October 2023                [Page 6]
+Liu, et al.               Expires 14 April 2024                 [Page 6]
 
-Internet-Draft       Cloud Optical Problem Statement          April 2023
+Internet-Draft       Cloud Optical Problem Statement        October 2023
 
 
    The management and control system should be able to calculate the
@@ -389,9 +389,9 @@ Internet-Draft       Cloud Optical Problem Statement          April 2023
 
 
 
-Liu, et al.              Expires 20 October 2023                [Page 7]
+Liu, et al.               Expires 14 April 2024                 [Page 7]
 
-Internet-Draft       Cloud Optical Problem Statement          April 2023
+Internet-Draft       Cloud Optical Problem Statement        October 2023
 
 
 4.  Manageability Considerations
@@ -426,6 +426,12 @@ Internet-Draft       Cloud Optical Problem Statement          April 2023
               <https://www.etsi.org/deliver/etsi_gr/
               F5G/001_099/001/01.01.01_60/gr_F5G001v010101p.pdf>.
 
+   [ITU-T.G.709.20-DRAFT]
+              ITU Telecommunication Standardization Sector (ITU-T),
+              "Overview of fine grain OTN", ITU-T G.709.20 , December
+              2023, <https://www.itu.int/itu-t/workprog/
+              wp_item.aspx?isn=18873>.
+
    [RFC4203]  Kompella, K., Ed. and Y. Rekhter, Ed., "OSPF Extensions in
               Support of Generalized Multi-Protocol Label Switching
               (GMPLS)", RFC 4203, DOI 10.17487/RFC4203, October 2005,
@@ -437,18 +443,17 @@ Internet-Draft       Cloud Optical Problem Statement          April 2023
               DOI 10.17487/RFC4328, January 2006,
               <https://www.rfc-editor.org/info/rfc4328>.
 
+
+
+Liu, et al.               Expires 14 April 2024                 [Page 8]
+
+Internet-Draft       Cloud Optical Problem Statement        October 2023
+
+
    [RFC4461]  Yasukawa, S., Ed., "Signaling Requirements for Point-to-
               Multipoint Traffic-Engineered MPLS Label Switched Paths
               (LSPs)", RFC 4461, DOI 10.17487/RFC4461, April 2006,
               <https://www.rfc-editor.org/info/rfc4461>.
-
-
-
-
-Liu, et al.              Expires 20 October 2023                [Page 8]
-
-Internet-Draft       Cloud Optical Problem Statement          April 2023
-
 
    [RFC5440]  Vasseur, JP., Ed. and JL. Le Roux, Ed., "Path Computation
               Element (PCE) Communication Protocol (PCEP)", RFC 5440,
@@ -484,27 +489,28 @@ Internet-Draft       Cloud Optical Problem Statement          April 2023
 
    [I-D.ietf-rtgwg-net2cloud-problem-statement]
               Dunbar, L., Malis, A. G., Jacquenet, C., Toy, M., and K.
-              Majumdar, "Status of this Memo", Work in Progress,
+              Majumdar, "Dynamic Networks to Hybrid Cloud DCs: Problem
+              Statement and Mitigation Practices", Work in Progress,
               Internet-Draft, draft-ietf-rtgwg-net2cloud-problem-
-              statement-24, 14 April 2023,
+              statement-30, 22 September 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rtgwg-
-              net2cloud-problem-statement-24>.
+              net2cloud-problem-statement-30>.
+
+
+
+
+
+
+Liu, et al.               Expires 14 April 2024                 [Page 9]
+
+Internet-Draft       Cloud Optical Problem Statement        October 2023
+
 
 Acknowledgments
 
    TBD
 
 Authors' Addresses
-
-
-
-
-
-
-Liu, et al.              Expires 20 October 2023                [Page 9]
-
-Internet-Draft       Cloud Optical Problem Statement          April 2023
-
 
    Sheng Liu
    China Mobile
@@ -551,10 +557,4 @@ Internet-Draft       Cloud Optical Problem Statement          April 2023
 
 
 
-
-
-
-
-
-
-Liu, et al.              Expires 20 October 2023               [Page 10]
+Liu, et al.               Expires 14 April 2024                [Page 10]

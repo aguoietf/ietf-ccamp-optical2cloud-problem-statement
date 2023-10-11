@@ -4,7 +4,7 @@ coding: utf-8
 title: Problem Statement and Gap Analysis for Connecting to Cloud DCs via Optical Networks
  
 abbrev: Cloud Optical Problem Statement
-docname: draft-liu-ccamp-optical2cloud-problem-statement-04
+docname: draft-liu-ccamp-optical2cloud-problem-statement-05
 workgroup: CCAMP Working Group
 category: std
 ipr: trust200902
@@ -43,14 +43,25 @@ normative:
     seriesinfo: ETSI GR F5G 001
     target: https://www.etsi.org/deliver/etsi_gr/F5G/001_099/001/01.01.01_60/gr_F5G001v010101p.pdf
 
+  ITU-T.G.709.20-DRAFT:
+    title: Overview of fine grain OTN
+    author:
+      org: ITU Telecommunication Standardization Sector (ITU-T)
+    date: December 2023
+    seriesinfo: ITU-T G.709.20
+    target: https://www.itu.int/itu-t/workprog/wp_item.aspx?isn=18873
+
 --- abstract
 
-   Many applications, including optical leased line, cloud VR and computing cloud, benefit from the network
-   scenario where the data traffic to cloud data centers (DCs) is carried end-to-end over an optical network.
-   This document describes the problem statement and requirements for connecting to cloud DCs over optical
-   networks, and presents a gap analysis for existing control plane protocols for supporting this network
-   scenario.
- 
+   Optical networking technologies such as fine-grain OTN (fgOTN) enable premium cloud-based services,
+   including optical leased line, cloud Virtual Reality (cloud-VR), and computing to be carried end-to-end 
+   optically between applications and cloud data centers (DCs), offering premium quality and deterministic
+   performance.
+
+   This document describes the problem statement and requirements for accessing cloud services through optical 
+   networks. It also discusses technical gaps for IETF-developed management and control protocols to support 
+   service provisioning and management in such an all-optical network scenario.
+
 --- middle
 
 # Introduction
@@ -76,9 +87,11 @@ normative:
    ODU0 (Optical Data Unit 0) and above.  This bandwidth granularity is typically more than what a
    single application would demand, therefore, user traffic usually needs to be aggregated before
    being carried forward through the network.  However, advanced OTN technologies developed in ITU-T
-   work items have aimed to enhance OTN to support services of much finer granularity.  These enhancements,
-   when implemented, will make OTN an even more suitable solution for bearing cloud traffic with high quality
-   and bandwidth granularity close to what an IP/Ethernet-based network could offer.
+   work items have aimed to enhance OTN to support services of much finer granularity.  These enhancements are
+   reflected in the latest transmission standards of fine-grain OTN, or fgOTN, development by the
+   ITU-T Q11/SG15 {{ITU-T.G.709.20-DRAFT}}. fgOTN enables an even more suitable solution to bear cloud traffic with high quality
+   and finer bandwidth granularity up to 10Mbps per time slot, which is very close to what an
+   IP/Ethernet-based network could offer.
  
    Many cloud-based services that require high bandwdith, deterministic service quality, and flexible
    access could potentially benefit from the network scenario of using OTN-based aggregation networks
@@ -105,11 +118,13 @@ normative:
  
 ## Multi-cloud Access
  
-   Cloud services are deployed in geographically distributed locations for scalability and resilliency,
-   and they are usually hosted by multiple interconnected DCs.  DCs have usually been interconnected
-   through Layer 2/3 switches or routers with full mesh connectivity.  To improve interaction
-   efficiency as well as service experience, OTN is also considered as an option for DC interconnection.
-   This network scenario is illustrated in {{fig-cloud-access-optical}}.
+   Cloud services are typically deployed in geographically distributed locations for scalability and resilliency,
+   and hosted by multiple DCs, each of which provides different cloud applications. This requires a 
+   Point-to-Multi-Point (P2MP) or Multi-Point-to-Multi-Point (MP2MP) connectivity between service access
+   points and the cloud DCs. The connectivities are traditionally provided over Layer 2/3 connections. To improve interaction
+   efficiency as well as service experience, OTN (including fgOTN) is also considered as a viable 
+   option for DC interconnection. This network scenario is illustrated in the example scenario 
+   {{fig-cloud-access-optical}}.
  
 ~~~~ 
       __________                                             ________
@@ -128,8 +143,8 @@ normative:
 ~~~~
 {: #fig-cloud-access-optical title="Multi-cloud access through an OTN"}
  
-   A customer application is connected to the cloud via one of the Customer Premises
-   Equipment (CPE), and access cloud services are hosted in multiple clouds that are
+   In this example, a customer application is connected to the cloud via one of the Customer Premises
+   Equipment (CPE), and cloud services are hosted in multiple clouds that are
    attached to different cloud gateways.  Layer 2 or Layer 3 Virtual Private Networks
    (L2VPN or L3VPN) are used as overlay services on top of the OTN to support
    multi-cloud access.  Serving as an overlay, the OTNs should provide the
