@@ -10,7 +10,7 @@
 <?rfc symrefs="yes"?>
 <?rfc comments="yes"?>
 
-<rfc ipr="trust200902" docName="draft-liu-ccamp-optical2cloud-problem-statement-06" category="std">
+<rfc ipr="trust200902" docName="draft-liu-ccamp-optical2cloud-problem-statement-07" category="std">
 
   <front>
     <title abbrev="Cloud Optical Problem Statement">Problem Statement and Gap Analysis for Connecting to Cloud DCs via Optical Networks</title>
@@ -46,7 +46,7 @@
       </address>
     </author>
 
-    <date year="2024" month="April" day="23"/>
+    <date year="2024" month="October" day="21"/>
 
     
     <workgroup>CCAMP Working Group</workgroup>
@@ -453,9 +453,9 @@
 
 
 
-<reference anchor='I-D.ietf-rtgwg-net2cloud-problem-statement' target='https://datatracker.ietf.org/doc/html/draft-ietf-rtgwg-net2cloud-problem-statement-30'>
+<reference anchor='I-D.ietf-rtgwg-net2cloud-problem-statement' target='https://datatracker.ietf.org/doc/html/draft-ietf-rtgwg-net2cloud-problem-statement-41'>
    <front>
-      <title>Dynamic Networks to Hybrid Cloud DCs: Problem Statement and Mitigation Practices</title>
+      <title>Dynamic Networks to Hybrid Cloud DCs: Problems and Mitigation Practices</title>
       <author fullname='Linda Dunbar' initials='L.' surname='Dunbar'>
          <organization>Futurewei</organization>
       </author>
@@ -471,23 +471,21 @@
       <author fullname='Kausik Majumdar' initials='K.' surname='Majumdar'>
          <organization>Microsoft</organization>
       </author>
-      <date day='22' month='September' year='2023'/>
+      <date day='19' month='August' year='2024'/>
       <abstract>
-	 <t>   This document describes the network-related problems enterprises
-   face at the moment of writing this specification when
+	 <t>   This document describes a set of network-related problems
+   enterprises face at the time of writing this document (2023) when
    interconnecting their branch offices with dynamic workloads in
-   third-party data centers (DC) (a.k.a. Cloud DCs). The Net2Cloud
-   problem statements are mainly for enterprises with traditional VPN
-   services who want to leverage those networks (instead of altogether
-   abandoning them). Other problems are out of the scope of this
-   document.
-   This document also describes the mitigation practices to alleviate
-   the issues caused by the identified problems.
+   third-party data centers (DCs) (a.k.a. Cloud DCs). These problems
+   are mainly from enterprises with conventional VPN services that want
+   to leverage those networks (instead of altogether abandoning them).
+   This document also describes various mitigation practices and
+   actions to soften the issues induced by these problems.
 
 	 </t>
       </abstract>
    </front>
-   <seriesInfo name='Internet-Draft' value='draft-ietf-rtgwg-net2cloud-problem-statement-30'/>
+   <seriesInfo name='Internet-Draft' value='draft-ietf-rtgwg-net2cloud-problem-statement-41'/>
    
 </reference>
 
@@ -533,11 +531,11 @@
   </back>
 
 <!-- ##markdown-source:
-H4sIAPu8J2YAA9VbW3MbN5Z+d5X/AyZ5kSYkdbGdOJpKTRRJVlRj2RpLdmpm
+H4sIALhkFmcAA9VbW3MbN5Z+d5X/AyZ5kSYkdbGdOJpKTRRJVlRj2RpLdmpm
 s+WCukEScbPBNLol05f97fudcwA0mqKcTNW+LJOyyCYuB+fynRs4Ho8fPihc
 aevZgera6fjpwwfq4YPWtpU5UBeNu67MQl22ujULU7dK16U61Ut1WOtq5a1X
 U9eoI1fXpmixhmqdOqpcV6rjI69urFYvl60tdKVemPbWNe88L6+vrxtzcxCG
-xiF3dnv4oHRFrRegpGz0tB1XthsXhV4sx07m7Be0wngpM8c+zhzvfvvwAe03
+xiF3dnv4oHRFrRegpGz0tB1XthsXhV4sx07m7Be0wngpM8c+zhzvfvfwAe03
 a1y3xEZHh+cX6hc8ICJP6SGOjcEz16wOlG/Lhw/ssjlQbdP5dn939/vdfaYU
 K9blW125GkSsDMhf2gP1X60rRsq7pm3M1OPdaiFvCreg7f1/yzG7du6aA7xX
 Y/pHKTnM5dyAiue2k4euAe+P5rbW6txd28rIY7PQtjpQOLOn8bfVjwWNWfCQ
@@ -667,7 +665,7 @@ DwrEhH46DqHqZbwtes/AQTrBl+c+bGrjpXtytq9niDPrr8DxBaf1yJt3IYFT
 +MIuNUxvzqWQdAUTwUp8FM/Qc0mu7FFwUN1Hy9PHTx7Rnf5zcNKl7qLcC89z
 4EEYuXV89GI7L0VszP65QFIX0AeOx3hT/jlQuukb22ikyvSjiJDOcpaVLjCb
 +sY2rmaB8P3brk5lwbRZ0PqzwxeHf0qH00VBqAhP0uGSHQ+nHydew1T5w8cD
-VXf0y11T/vDVFLmyCRddvlaHBf0YrDLlLN4vHdjV5pkPH/wv0Rs0DjlBAAA=
+VXf0y11T/vDVFLmyCRddvlaHBf0YrDLlLN4vHdjV5pkPH/wvrvmqZTlBAAA=
 
 -->
 
